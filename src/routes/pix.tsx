@@ -1,0 +1,325 @@
+import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
+import { useTargetName } from "@/lib/use-target-name";
+import { useServerFn } from "@tanstack/react-start";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { z } from "zod";
+import { getPixStatus, type PixCharge } from "@/lib/pix.functions";
+import { fbqTrackOnce } from "@/lib/tracking";
+
+const searchSchema = z.object({
+  id: z.coerce.string().min(1),
+  phone: z.coerce.string().optional().default(""),
+  sex: z.enum(["M", "F"]).optional().default("M"),
+});
+
+export const Route = createFileRoute("/pix")({
+  head: () => ({
+    meta: [
+      { title: "PIX gerado — pague agora e desbloqueie o acesso" },
+      {
+        name: "description",
+        content:
+          "Seu PIX foi gerado. Pague em segundos e libere o acesso completo imediatamente — sigilo total, sem comprovante.",
+      },
+      { name: "robots", content: "noindex,follow" },
+    ],
+  }),
+  validateSearch: (s) => searchSchema.parse(s),
+  component: PixPage,
+});
+
+const STORAGE_PREFIX = "zr.pix.";
+
+function PixPage() {
+  const { id, phone, sex } = Route.useSearch();
+  const navigate = useNavigate();
+  const checkPix = useServerFn(getPixStatus);
+  const [charge, setCharge] = useState<PixCharge | null>(null);
+  const [copied, setCopied] = useState(false);
+  const [statusLabel, setStatusLabel] = useState("Aguardando pagamento…");
+  const [seconds, setSeconds] = useState(15 * 60); // 15 min de urgência
+  const paidRef = useRef(false);
+
+  // Recupera o charge salvo no sessionStorage pelo checkout
+  useEffect(() => {
+    try {
+      const raw = sessionStorage.getItem(STORAGE_PREFIX + id);
+      if (raw) setCharge(JSON.parse(raw));
+    } catch {}
+  }, [id]);
+
+  // Sem charge no storage (refresh perdeu o QR) → volta ao checkout,
+  // MAS só depois de checar se o pagamento já foi confirmado — assim
+  // um usuário que reabre a aba do PIX ainda é redirecionado.
+  useEffect(() => {
+    if (charge || !id) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const s = await checkPix({ data: { id } });
+        if (cancelled) return;
+        if (s.paid) {
+          paidRef.current = true;
+          navigate({ to: "/sigilo", search: { phone, sex } });
+          return;
+        }
+      } catch {}
+      if (!cancelled) navigate({ to: "/checkout", search: { phone, sex } });
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [charge, id, checkPix, navigate, phone, sex]);
+
+  // Cronômetro de urgência
+  useEffect(() => {
+    const t = window.setInterval(() => {
+      setSeconds((s) => (s > 0 ? s - 1 : 0));
+    }, 1000);
+    return () => window.clearInterval(t);
+  }, []);
+
+  const [checking, setChecking] = useState(false);
+  const [checkMsg, setCheckMsg] = useState<string | null>(null);
+  const tickRef = useRef<((force?: boolean) => Promise<boolean>) | null>(null);
+
+  // Polling de status
+  useEffect(() => {
+    if (!id) return;
+    let cancelled = false;
+    let pollCount = 0;
+    // `force` = consulta completa à Codefy (fallback). Ticks normais usam o
+    // modo leve (só Supabase/webhook) para não saturar o rate limit da Codefy.
+    const tick = async (force = false): Promise<boolean> => {
+      if (paidRef.current) return true;
+      if (cancelled) return false;
+      // A cada 6 ticks (~24s) faz uma consulta completa à Codefy como fallback,
+      // caso o webhook não tenha chegado; os demais ticks são leves.
+      const light = !force && pollCount++ % 6 !== 5;
+      try {
+        const s = await checkPix({ data: { id, light } });
+        if (cancelled) return false;
+        if (s.paid) {
+          paidRef.current = true;
+          setStatusLabel("Pagamento confirmado! Redirecionando…");
+          (window as any).dataLayer = (window as any).dataLayer || [];
+          (window as any).dataLayer.push({
+            event: "purchase",
+            transaction_id: id,
+            valor: charge?.amount,
+            moeda: "BRL",
+          });
+          fbqTrackOnce(
+            `purchase-${id}`,
+            "Purchase",
+            {
+              value: charge?.amount,
+              currency: "BRL",
+              content_ids: [id],
+              content_type: "product",
+              transaction_id: id,
+            },
+            { eventId: `purchase-${id}` }
+          );
+          try { sessionStorage.removeItem(STORAGE_PREFIX + id); } catch {}
+          navigate({ to: "/sigilo", search: { phone, sex } });
+          return true;
+        }
+        setStatusLabel("Aguardando pagamento…");
+        return false;
+      } catch {
+        return false;
+      }
+    };
+    tickRef.current = tick;
+    tick();
+    const iv = window.setInterval(() => tick(), 4000);
+    // Retomar a aba/foco força uma consulta completa à Codefy (fallback rápido).
+    const onVis = () => { if (document.visibilityState === "visible") tick(true); };
+    const onFocus = () => tick(true);
+    window.addEventListener("visibilitychange", onVis);
+    window.addEventListener("focus", onFocus);
+    return () => {
+      cancelled = true;
+      window.clearInterval(iv);
+      window.removeEventListener("visibilitychange", onVis);
+      window.removeEventListener("focus", onFocus);
+    };
+  }, [id, charge?.amount, checkPix, navigate, phone, sex]);
+
+  const copy = async () => {
+    if (!charge?.pixCopiaCola) return;
+    try {
+      await navigator.clipboard.writeText(charge.pixCopiaCola);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {}
+  };
+
+  const handleAlreadyPaid = async () => {
+    if (checking || paidRef.current) return;
+    setChecking(true);
+    setCheckMsg("Verificando pagamento no banco…");
+    try {
+      const paid = await tickRef.current?.(true);
+      if (!paid) {
+        setCheckMsg("Ainda não identificamos seu pagamento. Aguarde alguns segundos e tente novamente.");
+      }
+    } catch {
+      setCheckMsg("Não foi possível verificar agora. Tente novamente em instantes.");
+    } finally {
+      setChecking(false);
+      setTimeout(() => setCheckMsg(null), 6000);
+    }
+  };
+
+  const qrImgSrc = useMemo(() => {
+    if (!charge) return "";
+    return (
+      charge.qrCodeBase64 ||
+      (charge.pixCopiaCola
+        ? `https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=0&data=${encodeURIComponent(charge.pixCopiaCola)}`
+        : "")
+    );
+  }, [charge]);
+
+  const mm = String(Math.floor(seconds / 60)).padStart(2, "0");
+  const ss = String(seconds % 60).padStart(2, "0");
+  const amount = charge?.amount ?? 0;
+
+  return (
+    <div className="min-h-screen bg-white text-slate-900 font-['Inter',sans-serif] relative overflow-hidden">
+      {/* fundo */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(217,169,40,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(217,169,40,0.06) 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+        }}
+      />
+      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-yellow-500/[0.10] blur-[160px] rounded-full pointer-events-none" />
+
+      {/* faixa de urgência */}
+      <div className="relative z-10 bg-gradient-to-r from-red-600 via-red-500 to-red-600 text-slate-900 text-center text-[12px] font-bold py-2 px-3 uppercase tracking-wider">
+        ⏳ PIX expira em <span className="font-mono text-base mx-1">{mm}:{ss}</span> — não feche essa página
+      </div>
+
+      <div className="relative z-10 max-w-md mx-auto px-4 py-6 space-y-5">
+        {/* banner principal */}
+        <div className="rounded-2xl overflow-hidden border border-yellow-300 shadow-[0_15px_40px_rgba(217,169,40,0.15)]">
+          <img
+            src="/images/pix-falta-pouco.webp"
+            alt="Falta pouco para seu acesso ser liberado — pague o seu PIX com segurança"
+            className="w-full h-auto block"
+            width={960}
+            height={541}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+          />
+        </div>
+
+        {/* Card principal */}
+        <div className="bg-gradient-to-br from-white/95 to-slate-50/40 backdrop-blur-xl border border-yellow-300 rounded-3xl p-5 space-y-4 shadow-[0_25px_70px_rgba(217,169,40,0.18)]">
+          <div className="text-center space-y-1">
+            <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace]">
+              Pague para desbloquear
+            </div>
+            <div>
+              <span className="text-[#128C7E] text-5xl font-extrabold tracking-tight">R${Math.floor(amount)}</span>
+              <span className="text-[#128C7E] text-xl font-bold">
+                ,{String(Math.round((amount - Math.floor(amount)) * 100)).padStart(2, "0")}
+              </span>
+            </div>
+            <div className="text-[12px] text-slate-500">
+              Liberação <span className="text-[#25D366] font-semibold">imediata</span> após a confirmação
+            </div>
+          </div>
+
+          {!charge ? (
+            <div className="py-10 text-center text-slate-500 text-sm">Carregando PIX…</div>
+          ) : (
+            <>
+              {/* QR */}
+              <div className="bg-white p-3 rounded-2xl mx-auto w-fit shadow-[0_0_40px_rgba(217,169,40,0.25)]">
+                {qrImgSrc ? (
+                  <img src={qrImgSrc} alt="QR Code PIX" className="w-56 h-56 block" />
+                ) : (
+                  <div className="w-56 h-56 grid place-items-center text-slate-500 text-xs">QR indisponível</div>
+                )}
+              </div>
+
+              <button
+                onClick={copy}
+                className="w-full h-14 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-slate-900 font-extrabold rounded-2xl transition-all active:scale-[0.98] uppercase tracking-wider text-[15px] shadow-[0_10px_30px_-8px_rgba(217,169,40,0.6)]"
+              >
+                {copied ? "✅ Código copiado!" : "📋 Copiar código PIX"}
+              </button>
+
+              <div>
+                <label className="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-['Geist_Mono',monospace]">
+                  PIX Copia e Cola
+                </label>
+                <div className="mt-1 bg-white border border-slate-200 rounded-xl p-3 text-[11px] font-['Geist_Mono',monospace] text-slate-700 break-all max-h-24 overflow-y-auto">
+                  {charge.pixCopiaCola}
+                </div>
+              </div>
+
+              <div className="flex items-center justify-center gap-2 text-[12px] text-slate-700 bg-yellow-50 border border-yellow-200 rounded-xl py-2">
+                <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
+                <span className="font-semibold">{statusLabel}</span>
+              </div>
+
+              <button
+                onClick={handleAlreadyPaid}
+                disabled={checking}
+                className="w-full h-12 bg-slate-100 border-2 border-yellow-500/60 hover:border-yellow-400 hover:bg-yellow-50 text-[#25D366] font-bold rounded-2xl transition-all active:scale-[0.98] uppercase tracking-wider text-[13px] disabled:opacity-60 disabled:cursor-wait"
+              >
+                {checking ? "🔎 Verificando…" : "✅ Já efetuei o pagamento"}
+              </button>
+              {checkMsg && (
+                <div className="text-center text-[11px] text-slate-500 -mt-2">{checkMsg}</div>
+              )}
+            </>
+          )}
+        </div>
+
+        {/* Como pagar o PIX */}
+        <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
+          <img
+            src="/images/pix-como-pagar.webp"
+            alt="Veja como pagar seu PIX: copie o código, abra o app do banco, cole o código e confirme o pagamento"
+            className="w-full h-auto block"
+            width={960}
+            height={405}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
+        {/* Garantia 7 dias */}
+        <div className="bg-gradient-to-br from-yellow-500/15 to-slate-50/40 border border-yellow-300 rounded-2xl p-4 space-y-2">
+          <div className="flex items-center gap-2">
+            <span className="text-[#128C7E] text-lg">🛡️</span>
+            <h3 className="text-sm font-bold text-[#25D366] uppercase tracking-wider font-['Geist_Mono',monospace]">
+              Garantia incondicional de 7 dias
+            </h3>
+          </div>
+          <p className="text-[12px] text-slate-800 leading-relaxed">
+            Seu dinheiro fica <span className="text-[#25D366] font-semibold">protegido</span> e só é liberado para a empresa <span className="text-[#25D366] font-semibold">Zap Radar LTDA</span> após os 7 dias de uso da plataforma.
+          </p>
+        </div>
+
+        <Link
+          to="/checkout"
+          search={{ phone, sex }}
+          className="block w-full text-center text-[11px] font-['Geist_Mono',monospace] uppercase tracking-[0.2em] text-slate-500 hover:text-slate-500 transition-colors py-3"
+        >
+          ← gerar novo PIX
+        </Link>
+      </div>
+    </div>
+  );
+}
+
