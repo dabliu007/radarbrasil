@@ -17,7 +17,7 @@ export function HeroSection() {
       <Container className="relative grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="flex flex-col items-start">
           <h1 className="text-balance font-display text-4xl font-extrabold uppercase leading-[1.02] tracking-tight text-[#F5F5F2] sm:text-5xl lg:text-6xl">
-            Descubra a verdade e{" "}
+            Proteja seu filho e{" "}
             <span
               className="bg-clip-text text-transparent"
               style={{
@@ -25,19 +25,19 @@ export function HeroSection() {
                   "linear-gradient(100deg, #B17B13 0%, #D9A928 40%, #FFE078 100%)",
               }}
             >
-              acabe com a dúvida da traição
+              tenha paz de espírito
             </span>
             .
           </h1>
 
           <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-[#A7A7A7] sm:text-lg">
-            Acesso o celular que você quiser e acompanhe WhatsApp, mensagens, fotos,
-            ligações e localização em tempo real — de forma 100% sigilosa, sem que a
-            pessoa desconfie.
+            Acompanhe o celular do seu filho e veja WhatsApp, mensagens, fotos,
+            ligações e localização em tempo real — com responsabilidade e
+            transparência.
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <GoldButton to="/verificar">Testar grátis agora</GoldButton>
+            <GoldButton to="/acompanhar">Testar grátis agora</GoldButton>
             <OutlineButton href="#como-funciona">Como funciona</OutlineButton>
           </div>
 

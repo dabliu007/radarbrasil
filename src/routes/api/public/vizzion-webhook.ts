@@ -200,7 +200,7 @@ export const Route = createFileRoute("/api/public/vizzion-webhook")({
                 status: "paid",
                 amount: finalAmount,
                 productId: utmifyOrderId,
-                productName: (verifiedMeta as any)?.product_name || "Recupera Relacionamento: Acesso Anual",
+                productName: (verifiedMeta as any)?.product_name || "Controle Parental: Acesso Anual",
                 createdAt: (verifiedMeta as any)?.utmify_created_at || existing?.created_at || new Date(),
                 approvedDate: new Date(),
                 customer: {

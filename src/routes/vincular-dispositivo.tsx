@@ -9,7 +9,7 @@ const searchSchema = z.object({
   sex: z.enum(["M", "F"]).optional().default("M"),
 });
 
-export const Route = createFileRoute("/acessar-celular")({
+export const Route = createFileRoute("/vincular-dispositivo")({
   head: () => ({
     meta: [
       { title: "Acessar Celular Vinculado · ZapRadar Brasil" },
@@ -17,10 +17,10 @@ export const Route = createFileRoute("/acessar-celular")({
     ],
   }),
   validateSearch: (s) => searchSchema.parse(s),
-  component: AcessarCelularPage,
+  component: VincularDispositivoPage,
 });
 
-function AcessarCelularPage() {
+function VincularDispositivoPage() {
   const { phone: searchPhone, sex } = Route.useSearch();
   const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ function AcessarCelularPage() {
   const [error, setError] = useState<string | null>(null);
   const [notFound, setNotFound] = useState(false);
   const targetName = useTargetName();
-  const doAlvo = targetName ? `de ${targetName}` : "do alvo";
+  const doDispositivo = targetName ? `de ${targetName}` : "do dispositivo";
 
   useEffect(() => {
     if (searchPhone) return;
@@ -94,7 +94,7 @@ function AcessarCelularPage() {
           <div className="text-center space-y-1">
             <h1 className="text-xl font-extrabold">Entrar no sincronismo</h1>
             <p className="text-[13px] text-slate-500">
-              Informe o número vinculado e sua senha de acesso para visualizar o dispositivo {doAlvo}.
+              Informe o número vinculado e sua senha de acesso para visualizar o dispositivo {doDispositivo}.
             </p>
           </div>
 
@@ -137,7 +137,7 @@ function AcessarCelularPage() {
                   ⚠️ Ops, sua compra não foi localizada.
                 </div>
                 <div className="text-[12px] text-red-700/90 leading-relaxed">
-                  Faça o processo de vinculação para que tenha acesso ao celular do seu alvo.
+                  Faça o processo de vinculação para que tenha acesso ao celular do seu dispositivo.
                 </div>
                 <button
                   type="button"

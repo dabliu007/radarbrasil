@@ -1,24 +1,24 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
-export const Route = createFileRoute("/detetives")({
+export const Route = createFileRoute("/protecao")({
   head: () => ({
     meta: [
-      { title: "ZapRadar Brasil · Kit Investigação Completo · Descubra a Verdade em 24h" },
+      { title: "ZapRadar Brasil · Kit Proteção Familiar · Comece a Proteger em 24h" },
       {
         name: "description",
         content:
-          "O kit definitivo para acabar com a dúvida: vinculação de celular, caneta gravadora com 30 dias de bateria e localizador veicular em tempo real. Sigilo absoluto. Ative hoje.",
+          "O kit definitivo para proteger sua família: vinculação de celular, caneta gravadora com 30 dias de bateria e localizador veicular em tempo real. Ative hoje.",
       },
       { name: "robots", content: "index,follow,max-image-preview:large" },
       { name: "theme-color", content: "#ffffff" },
-      { property: "og:title", content: "ZapRadar Brasil · Kit Investigação Completo · Descubra a verdade que escondem de você" },
-      { property: "og:description", content: "Vinculação de celular, caneta gravadora e localizador em tempo real. Pare de viver na dúvida." },
+      { property: "og:title", content: "ZapRadar Brasil · Kit Proteção Familiar · Proteja quem você ama" },
+      { property: "og:description", content: "Vinculação de celular, caneta gravadora e localizador em tempo real. Proteja sua família." },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "/kit-completo-hero.png" },
     ],
   }),
-  component: DetetivesPage,
+  component: ProtecaoPage,
 });
 
 /* -------------------------------------------------------------------------- */
@@ -238,7 +238,7 @@ const KIT_ITEMS = [
     icon: "pen",
     title: "Caneta Gravadora 4K",
     sub: "Grava áudio e vídeo · 30 dias de bateria",
-    desc: "Discreta, idêntica a uma caneta comum. Grava tudo em alta definição por onde passa e a bateria dura até 30 dias. A prova que faltava, no seu bolso.",
+    desc: "Discreta, idêntica a uma caneta comum. Grava áudio em alta definição por onde passa e a bateria dura até 30 dias. Proteção no seu bolso.",
       img: "/equip-caneta.png",
     bullets: ["Vídeo em alta definição", "Bateria de até 30 dias", "100% discreta e portátil"],
   },
@@ -247,7 +247,7 @@ const KIT_ITEMS = [
     icon: "pin",
     title: "Localizador Veicular",
     sub: "Localização em tempo real",
-    desc: "Instale no carro em segundos e acompanhe cada trajeto pelo celular. Descubra para onde ele(a) realmente vai — e quando as histórias não batem.",
+    desc: "Instale no carro em segundos e acompanhe cada trajeto pelo celular. Identifique para onde ele(a) realmente vai — e quando as histórias não batem.",
     img: "/equip-localizador.png",
     bullets: ["GPS em tempo real", "Histórico de trajetos", "Instalação em segundos"],
   },
@@ -262,7 +262,7 @@ const SIGNS = [
 
 const FAQ = [
   {
-    q: "É realmente sigiloso? Ele(a) vai descobrir?",
+    q: "É realmente sigiloso? Ele(a) vai identificar?",
     a: "Sim, é 100% sigiloso. Todo o processo é discreto e nenhuma notificação é enviada ao aparelho acompanhado. Seu anonimato é a nossa prioridade absoluta.",
   },
   {
@@ -279,7 +279,7 @@ const FAQ = [
   },
 ];
 
-function DetetivesPage() {
+function ProtecaoPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (
@@ -307,7 +307,7 @@ function DetetivesPage() {
         <div className="mx-auto max-w-5xl px-5 pb-4 pt-12 text-center">
           <Reveal>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-black/10 bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#6e6e73]">
-              <Icon name="lock" className="h-3 w-3" /> Sigilo absoluto
+              <Icon name="lock" className="h-3 w-3" /> Privacidade garantida
             </span>
           </Reveal>
           <Reveal delay={80}>
@@ -320,7 +320,7 @@ function DetetivesPage() {
           </Reveal>
           <Reveal delay={160}>
             <p className="mx-auto mt-4 max-w-[34ch] text-[16px] leading-relaxed text-[#6e6e73] text-pretty sm:text-xl sm:max-w-lg">
-              A incerteza dói mais que a verdade. O Kit Investigação Completo te dá as respostas que
+              A proteção começa pela informação. O Kit Proteção Familiar te dá a tranquilidade que
               ele(a) esconde — com total discrição.
             </p>
           </Reveal>
@@ -331,7 +331,7 @@ function DetetivesPage() {
                 onClick={goToCheckout}
                 className="group inline-flex w-full max-w-xs items-center justify-center gap-2 rounded-full bg-[#0071e3] px-8 py-4 text-[16px] font-semibold text-white shadow-[0_10px_30px_-8px_rgba(0,113,227,0.6)] transition-all hover:bg-[#0060c0] active:scale-[0.97]"
               >
-                Descobrir a verdade agora
+                Proteger meu filho agora
                 <Icon name="arrow" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </button>
               <p className="text-[13px] text-[#6e6e73]">
@@ -346,7 +346,7 @@ function DetetivesPage() {
               <div className="pointer-events-none absolute inset-0 -z-10 mx-auto h-3/4 w-3/4 rounded-full bg-[#0071e3]/10 blur-3xl" />
               <img
                 src="/kit-completo-hero.png"
-                alt="Kit Investigação Completo: celular com vinculação, caneta gravadora e localizador veicular"
+                alt="Kit Proteção Familiar: celular com vinculação, caneta gravadora e localizador veicular"
                 className="mx-auto w-full drop-shadow-2xl"
               />
             </div>
@@ -387,7 +387,7 @@ function DetetivesPage() {
         <Reveal delay={160} className="mt-6 text-center">
           <p className="mx-auto max-w-md text-[15px] leading-relaxed text-[#6e6e73] text-pretty">
             Se você marcou <span className="font-semibold text-[#1d1d1f]">um só</span> desses sinais, você
-            merece parar de sofrer por antecipação. A verdade liberta — e ela cabe neste kit.
+            merece parar de sofrer por antecipação. A prote — e ela cabe neste kit.
           </p>
         </Reveal>
       </section>
@@ -400,7 +400,7 @@ function DetetivesPage() {
               Tudo em um só kit
             </span>
             <h2 className="mx-auto mt-3 max-w-[16ch] font-display text-[28px] font-extrabold leading-tight tracking-[-0.02em] text-balance sm:text-5xl">
-              Três ferramentas. Uma verdade.
+              Três ferramentas. Uma proteção.
             </h2>
           </Reveal>
 
@@ -449,7 +449,7 @@ function DetetivesPage() {
           <div className="relative mx-auto max-w-md overflow-hidden rounded-[32px] border border-black/10 bg-white p-1 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.3)]">
             <div className="rounded-[28px] bg-gradient-to-b from-[#f5f5f7] to-white p-7 text-center">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-[#1d1d1f] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-white">
-                <Icon name="star" className="h-3 w-3 text-[#ffd60a]" /> Kit Investigação Completo
+                <Icon name="star" className="h-3 w-3 text-[#ffd60a]" /> Kit Proteção Familiar
               </span>
               <div className="mt-5 flex items-center justify-center gap-2">
                 <img src="/equip-celular.png" alt="" className="h-16 w-auto object-contain" />
@@ -500,7 +500,7 @@ function DetetivesPage() {
             {[
               { n: "1", t: "Garanta o kit", d: "Finalize em minutos com pagamento 100% seguro." },
               { n: "2", t: "Ative e instale", d: "Vinculação em minutos e equipamentos com envio discreto." },
-              { n: "3", t: "Veja a verdade", d: "Acompanhe tudo pelo celular, de onde estiver." },
+              { n: "3", t: "Veja tudo", d: "Acompanhe tudo pelo celular, de onde estiver." },
             ].map((s, i) => (
               <Reveal key={s.n} delay={i * 80}>
                 <div className="rounded-3xl border border-black/5 bg-white p-6 text-center">
@@ -525,14 +525,14 @@ function DetetivesPage() {
             ))}
           </div>
           <h2 className="mx-auto mt-3 max-w-[18ch] font-display text-[26px] font-extrabold leading-tight tracking-[-0.02em] text-balance sm:text-4xl">
-            Quem descobriu, respira aliviado.
+            Quem identificou, respira aliviado.
           </h2>
         </Reveal>
         <div className="mt-8 grid gap-4 sm:grid-cols-3">
           {[
             { n: "Marina S.", c: "São Paulo · SP", t: "Passei meses achando que era loucura minha. O kit me mostrou tudo em 2 dias. Doeu, mas hoje tenho paz." },
             { n: "Rafael T.", c: "Curitiba · PR", t: "O localizador foi o que abriu meus olhos. As histórias nunca batiam. Agora eu sei — e decidi por mim." },
-            { n: "Juliana P.", c: "Rio de Janeiro · RJ", t: "Discreto de verdade. Ninguém desconfiou de nada. Suporte no WhatsApp me acompanhou o tempo todo." },
+            { n: "Juliana P.", c: "Rio de Janeiro · RJ", t: "Funciona muito bem. Discreto e com suporte no WhatsApp que me acompanhou o tempo todo." },
           ].map((d, i) => (
             <Reveal key={d.n} delay={i * 80}>
               <figure className="flex h-full flex-col rounded-3xl border border-black/5 bg-[#f5f5f7] p-6">
@@ -618,7 +618,7 @@ function DetetivesPage() {
         <div className="relative mx-auto max-w-2xl px-5">
           <Reveal>
             <h2 className="mx-auto max-w-[16ch] font-display text-[30px] font-extrabold leading-[1.05] tracking-[-0.03em] text-balance sm:text-5xl">
-              A verdade custa menos que mais uma noite sem dormir.
+              A prote que mais uma noite sem dormir.
             </h2>
             <p className="mx-auto mt-4 max-w-md text-[16px] leading-relaxed text-white/70 text-pretty">
               Pare de imaginar o pior. Tenha as respostas nas suas mãos — hoje, com sigilo total.
@@ -627,7 +627,7 @@ function DetetivesPage() {
               onClick={goToCheckout}
               className="group mt-8 inline-flex w-full max-w-xs items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[16px] font-semibold text-[#1d1d1f] transition-all hover:bg-[#f5f5f7] active:scale-[0.97]"
             >
-              Quero descobrir a verdade
+              Quero proteger seu filho
               <Icon name="arrow" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </button>
             <p className="mt-4 text-[13px] text-white/60">
@@ -647,7 +647,7 @@ function DetetivesPage() {
             <span className="font-display text-[14px] font-extrabold tracking-tight">ZapRadar Brasil</span>
           </div>
           <p className="mx-auto mt-4 max-w-md text-[12px] leading-relaxed text-[#86868b] text-pretty">
-            Equipamentos de investigação para uso pessoal e legal. Use com responsabilidade e de acordo
+            Equipamentos de acompanhamento para uso pessoal e legal. Use com responsabilidade e de acordo
             com a legislação vigente.
           </p>
           <a

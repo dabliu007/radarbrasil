@@ -44,7 +44,7 @@ function PrivacidadePage() {
       <H2>2. Dados que coletamos</H2>
       <ul>
         <li><strong>Dados de contato e cadastro:</strong> nome, e-mail, telefone/WhatsApp e, quando necessário para pagamento, CPF.</li>
-        <li><strong>Dados de pagamento:</strong> valor, meio de pagamento e identificador da transação (nunca armazenamos dados completos de cartão — o processamento é feito por parceiros certificados).</li>
+        <li><strong>Dados de pagamento:</strong> valor, meio de pagamento e identificador da transação (nunca armazenamos dados completos de cartão — o processamento é feito por filhos certificados).</li>
         <li><strong>Dados de navegação:</strong> endereço IP, tipo de dispositivo, sistema operacional, navegador, páginas visitadas, origem do tráfego e parâmetros de campanha (UTMs, fbclid, gclid).</li>
         <li><strong>Cookies e identificadores:</strong> utilizados para funcionamento do site, análise de audiência e mensuração de campanhas publicitárias.</li>
       </ul>

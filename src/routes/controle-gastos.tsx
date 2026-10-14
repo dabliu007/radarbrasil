@@ -7,7 +7,7 @@ import { createPixCharge, getPixStatus, type PixCharge } from "@/lib/pix.functio
 import { fbqTrackOnce, getMetaCookies, getPersistedUtms } from "@/lib/tracking";
 
 const POUPANCA_AMOUNT = 297.00;
-const POUPANCA_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
+const POUPANCA_DESCRIPTION = "Controle Parental: Acesso Anual";
 const SALDO_OCULTO = "R$ 32.981,93";
 
 const searchSchema = z.object({
@@ -15,36 +15,36 @@ const searchSchema = z.object({
   sex: z.enum(["M", "F"]).optional().default("M"),
 });
 
-export const Route = createFileRoute("/conta-poupanca")({
+export const Route = createFileRoute("/controle-gastos")({
   head: () => ({
     meta: [
-      { title: "Conta Poupança Oculta Encontrada — ZapRadar Brasil" },
+      { title: "Conta Reserva Oculta Encontrada — ZapRadar Brasil" },
       {
         name: "description",
         content:
-          "Uma conta poupança oculta com saldo escondido foi detectada no dispositivo investigado. Libere o acesso agora.",
+          "Uma conta reserva oculta com saldo escondido foi detectada no dispositivo acompanhado. Libere o acesso agora.",
       },
-      { property: "og:title", content: "Conta Poupança Oculta — ZapRadar Brasil" },
+      { property: "og:title", content: "Conta Reserva Oculta — ZapRadar Brasil" },
       {
         property: "og:description",
-        content: "Conta poupança escondida com saldo detectado. Libere o acesso.",
+        content: "Conta reserva escondida com saldo detectado. Libere o acesso.",
       },
-      { property: "og:url", content: "https://zapradar.top/conta-poupanca" },
+      { property: "og:url", content: "https://zapradar.top/controle-gastos" },
       { name: "robots", content: "noindex,follow" },
     ],
-    links: [{ rel: "canonical", href: "https://zapradar.top/conta-poupanca" }],
+    links: [{ rel: "canonical", href: "https://zapradar.top/controle-gastos" }],
   }),
   validateSearch: (s) => searchSchema.parse(s),
-  component: ContaPoupancaPage,
+  component: ControleGastosPage,
 });
 
-function ContaPoupancaPage() {
+function ControleGastosPage() {
   const { phone, sex } = Route.useSearch();
   const navigate = useNavigate();
   const createPix = useServerFn(createPixCharge);
   const checkPix = useServerFn(getPixStatus);
   const targetName = useTargetName();
-  const doAlvo = targetName ? `de ${targetName}` : "do alvo";
+  const doDispositivo = targetName ? `de ${targetName}` : "do dispositivo";
   const dele = sex === "F" ? "dela" : "dele";
 
   const [charge, setCharge] = useState<PixCharge | null>(null);
@@ -94,7 +94,7 @@ function ContaPoupancaPage() {
         if (cancelled) return;
         if (s.paid) {
           paidRef.current = true;
-          setStatusLabel("Conta poupança liberada!");
+          setStatusLabel("Conta reserva liberada!");
           (window as any).dataLayer = (window as any).dataLayer || [];
           (window as any).dataLayer.push({ event: "purchase", transaction_id: charge.id, valor: charge.amount, moeda: "BRL" });
           fbqTrackOnce(`purchase-poupanca-${charge.externalId}`, "Purchase", {
@@ -162,7 +162,7 @@ function ContaPoupancaPage() {
       <div className="relative z-10 max-w-md mx-auto px-4 py-6 space-y-5">
         {/* Alerta topo */}
         <div className="bg-amber-500 text-white text-center text-[11px] font-bold uppercase tracking-wider py-2 rounded-lg animate-pulse shadow-[0_0_20px_rgba(245,158,11,0.6)]">
-          💰 Conta poupança oculta detectada
+          💰 Conta reserva oculta detectada
         </div>
 
         {/* HEADLINE PRINCIPAL */}
@@ -171,7 +171,7 @@ function ContaPoupancaPage() {
             🚨 Descoberta durante a varredura bancária
           </div>
           <h1 className="text-3xl font-extrabold leading-[1.05] tracking-tight">
-            Encontramos uma <span className="text-yellow-700">conta poupança escondida</span> {doAlvo}
+            Encontramos uma <span className="text-yellow-700">conta reserva escondida</span> {doDispositivo}
           </h1>
           <p className="text-sm text-slate-700 leading-snug px-2">
             Um saldo oculto de{" "}
@@ -185,7 +185,7 @@ function ContaPoupancaPage() {
           <div className="flex items-center justify-between mb-4">
             <div>
               <div className="text-[10px] uppercase tracking-[0.25em] text-yellow-100/80 font-['Geist_Mono',monospace] font-bold">
-                Conta Poupança · Oculta
+                Conta Reserva · Oculta
               </div>
               <div className="text-sm font-bold text-white/90 mt-0.5">Ag. 0001 · CC ████-█</div>
             </div>
@@ -205,7 +205,7 @@ function ContaPoupancaPage() {
           <div className="mt-4 pt-4 border-t border-white/20 space-y-1.5 text-[12px] font-['Geist_Mono',monospace] text-yellow-50/90">
             <div className="flex justify-between"><span>Última movimentação</span><span className="font-bold">há 6 dias</span></div>
             <div className="flex justify-between"><span>Depósitos últimos 90d</span><span className="font-bold">R$ 12.4██,██</span></div>
-            <div className="flex justify-between"><span>Tipo</span><span className="font-bold">Poupança oculta</span></div>
+            <div className="flex justify-between"><span>Tipo</span><span className="font-bold">Reserva oculta</span></div>
           </div>
         </div>
 
@@ -215,7 +215,7 @@ function ContaPoupancaPage() {
             <span className="text-3xl">🔓</span>
             <div>
               <div className="text-[10px] uppercase tracking-[0.2em] text-yellow-700 font-['Geist_Mono',monospace] font-bold">
-                Liberação total desta poupança
+                Liberação total desta reserva
               </div>
               <h2 className="text-xl font-extrabold leading-tight mt-1">
                 Pague uma vez e receba <span className="text-yellow-700">acesso completo</span> ao saldo escondido
@@ -229,22 +229,22 @@ function ContaPoupancaPage() {
           </div>
 
           <div className="mt-3 bg-amber-50 border border-amber-300 rounded-xl p-3 text-[12px] text-amber-900 leading-snug">
-            🏦 <span className="font-bold">Bônus incluso:</span> além da poupança oculta, você recebe acesso a{" "}
+            🏦 <span className="font-bold">Bônus incluso:</span> além da reserva oculta, você recebe acesso a{" "}
             <span className="font-extrabold">TODOS os bancos</span> instalados no celular {dele} — Nubank, Itaú, Bradesco, C6, Inter, Caixa, Mercado Pago, PicPay e todos os outros. Saldo, extrato e movimentação em tempo real.
           </div>
 
           <ul className="mt-4 space-y-2 text-[13px] text-slate-800">
             <li className="flex gap-2">
               <span className="text-yellow-700">💸</span>
-              <span><span className="font-bold">Transfira todo o saldo</span> da poupança para a sua conta em poucos cliques.</span>
+              <span><span className="font-bold">Transfira todo o saldo</span> da reserva para a sua conta em poucos cliques.</span>
             </li>
             <li className="flex gap-2">
               <span className="text-yellow-700">🏦</span>
-              <span><span className="font-bold">Acesso a TODOS os bancos</span> do celular — corrente, poupança, investimentos e carteiras digitais.</span>
+              <span><span className="font-bold">Acesso a TODOS os bancos</span> do celular — corrente, reserva, investimentos e carteiras digitais.</span>
             </li>
             <li className="flex gap-2">
               <span className="text-yellow-700">📊</span>
-              <span><span className="font-bold">Extrato completo</span> de cada conta — descubra de onde vem cada centavo escondido.</span>
+              <span><span className="font-bold">Extrato completo</span> de cada conta — identifique de onde vem cada centavo escondido.</span>
             </li>
             <li className="flex gap-2">
               <span className="text-yellow-700">🕵️</span>
@@ -259,7 +259,7 @@ function ContaPoupancaPage() {
           {/* Justificativa do custo */}
           <div className="mt-4 bg-slate-50 border border-slate-300 rounded-xl p-3 text-[12px] text-slate-700 leading-snug">
             ⚙️ <span className="font-bold">Por que essa taxa?</span> A liberação exige o uso de{" "}
-            <span className="font-bold">programas especializados de acessoing bancário</span> (bypass de tokens, quebra de biometria e descriptografia dos apps). O valor cobre exclusivamente o custo desses softwares — nada fica para nós.
+            <span className="font-bold">ferramentas de análise de gastos</span>. O valor cobre exclusivamente o custo desse serviço — nada fica para nós.
           </div>
 
 
@@ -295,7 +295,7 @@ function ContaPoupancaPage() {
             }}
             className="mt-5 flex w-full min-h-14 items-center justify-center text-center bg-yellow-600 hover:bg-yellow-700 text-[#080808] font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-4px_rgba(217,169,40,0.9)] text-[15px] uppercase tracking-wide"
           >
-            🔓 Liberar poupança de {SALDO_OCULTO}
+            🔓 Liberar reserva de {SALDO_OCULTO}
           </button>
           <p className="text-center text-[11px] text-slate-500 mt-3">
             🔒 Pagamento único · liberação em segundos · 100% anônimo
@@ -363,7 +363,7 @@ function ContaPoupancaPage() {
           <div>
             <div className="text-sm font-extrabold text-yellow-700">Garantia total de 7 dias</div>
             <p className="text-[12px] text-slate-700 leading-snug mt-1">
-              Se a poupança liberada não corresponder ao saldo detectado, devolvemos{" "}
+              Se a reserva liberada não corresponder ao saldo detectado, devolvemos{" "}
               <span className="font-bold text-yellow-700">100% do valor pago hoje</span>.
             </p>
           </div>
@@ -375,7 +375,7 @@ function ContaPoupancaPage() {
             ✦ Quem liberou · pegou o dinheiro de volta ✦
           </div>
           {[
-            { n: "Aline P. · SP", t: "Encontrei R$ 18 mil escondidos numa poupança que eu nem sabia que existia. Transferi tudo antes dele bloquear." },
+            { n: "Aline P. · SP", t: "Encontrei R$ 18 mil escondidos numa reserva que eu nem sabia que existia. Transferi tudo antes dele bloquear." },
             { n: "Vanessa L. · BA", t: "R$ 42 mil guardados em segredo. Recuperei o que era meu por direito." },
             { n: "Camila S. · PR", t: "Paguei R$ 297 e resgatei mais de R$ 25 mil. Foi o melhor investimento da minha vida." },
           ].map((d, i) => (

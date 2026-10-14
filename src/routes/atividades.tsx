@@ -7,23 +7,23 @@ const searchSchema = z.object({
   sex: z.enum(["M", "F"]).optional().default("M"),
 });
 
-export const Route = createFileRoute("/conversas")({
+export const Route = createFileRoute("/atividades")({
   head: () => ({
     meta: [
       { title: "Painel de Conversas — ZapRadar Brasil" },
       {
         name: "description",
         content:
-          "Acesso ao painel de conversas investigadas pelo ZapRadar Brasil.",
+          "Acesso ao painel de conversas acompanhadas pelo ZapRadar Brasil.",
       },
       { property: "og:title", content: "Painel de Conversas — ZapRadar Brasil" },
-      { property: "og:url", content: "https://zapradar.top/conversas" },
+      { property: "og:url", content: "https://zapradar.top/atividades" },
       { name: "robots", content: "noindex,follow" },
     ],
-    links: [{ rel: "canonical", href: "https://zapradar.top/conversas" }],
+    links: [{ rel: "canonical", href: "https://zapradar.top/atividades" }],
   }),
   validateSearch: (s) => searchSchema.parse(s),
-  component: ConversasPage,
+  component: AtividadesPage,
 });
 
 type Chat = {
@@ -112,7 +112,7 @@ function MediaIcon({ type }: { type: NonNullable<Chat["isMedia"]> }) {
   );
 }
 
-function ConversasPage() {
+function AtividadesPage() {
   const { phone, sex } = Route.useSearch();
   const navigate = useNavigate();
   const [paywall, setPaywall] = useState<Chat | null>(null);

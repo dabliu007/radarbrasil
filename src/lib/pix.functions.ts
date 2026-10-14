@@ -21,7 +21,7 @@ const BASE_URL = "https://api-gateway.umbrellapag.com/api";
 const USER_AGENT = "UMBRELLAB2B/1.0";
 const APP_ORIGIN = process.env.PUBLIC_APP_URL?.replace(/\/$/, "") || "https://zapradar.top";
 const AMOUNT = 137.00;
-const PRODUCT_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
+const PRODUCT_DESCRIPTION = "Controle Parental: Acesso Anual";
 
 // Lista de valores legítimos do funil (checkout, downsells e upsells).
 // O front-end envia o valor junto com o pedido de cobrança, então sem essa

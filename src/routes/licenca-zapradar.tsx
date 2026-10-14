@@ -9,7 +9,7 @@ import depoimento2 from "@/assets/depoimento-2.mp4.asset.json";
 import { fbqTrackOnce, getMetaCookies, getPersistedUtms } from "@/lib/tracking";
 
 const LICENSE_AMOUNT = 97;
-const LICENSE_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
+const LICENSE_DESCRIPTION = "Controle Parental: Acesso Anual";
 const CHECKOUT_URL = "https://checkout.retroplay.top/VCCL1O8SD8PD";
 
 const searchSchema = z.object({
@@ -46,7 +46,7 @@ function LicencaZapRadarPage() {
   const createPix = useServerFn(createPixCharge);
   const checkPix = useServerFn(getPixStatus);
   const targetName = useTargetName();
-  const doAlvo = targetName ? `de ${targetName}` : "do alvo";
+  const doDispositivo = targetName ? `de ${targetName}` : "do dispositivo";
 
   const [charge, setCharge] = useState<PixCharge | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -117,7 +117,7 @@ function LicencaZapRadarPage() {
             transaction_id: charge.id,
           });
           const qs = new URLSearchParams({ phone: phone ?? "", sex: sex ?? "M" }).toString();
-          window.location.assign(`/conta-poupanca?${qs}`);
+          window.location.assign(`/controle-gastos?${qs}`);
         } else {
           setStatusLabel("Aguardando confirmação…");
         }
@@ -176,7 +176,7 @@ function LicencaZapRadarPage() {
             <div className="text-amber-600 text-xs">★★★★★</div>
           </div>
           <p className="text-[12px] text-slate-700 leading-snug">
-            Veja quem já desbloqueou a Licença ZapRadar Brasil e descobriu a verdade:
+            Veja quem já desbloqueou a Licença ZapRadar Brasil e começou a proteger:
           </p>
           <div className="grid grid-cols-1 gap-3">
             <video
@@ -237,7 +237,7 @@ function LicencaZapRadarPage() {
                 Licença oficial · válida por 1 ano
               </div>
               <h1 className="text-2xl font-extrabold leading-tight mt-1">
-                <span className="text-[#128C7E]">Licença ZapRadar Brasil</span> — acesso liberado ao celular {doAlvo}
+                <span className="text-[#128C7E]">Licença ZapRadar Brasil</span> — acesso liberado ao celular {doDispositivo}
               </h1>
             </div>
           </div>

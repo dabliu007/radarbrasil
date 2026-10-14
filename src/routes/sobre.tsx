@@ -36,7 +36,7 @@ function SobrePage() {
       <p>
         O <strong>ZapRadar Brasil</strong> é uma plataforma digital independente
         voltada à <strong>análise de conteúdo e comportamento em
-        relacionamentos</strong>, com foco em oferecer material informativo,
+        comportamentos</strong>, com foco em oferecer material informativo,
         reflexivo e de entretenimento para pessoas maiores de 18 anos.
       </p>
 
@@ -51,9 +51,9 @@ function SobrePage() {
       <p>
         Reunimos, em um único ambiente, materiais educativos e ferramentas de
         análise que auxiliam o usuário a refletir sobre sinais de
-        comportamento em relacionamentos. Todo o conteúdo apresentado tem
+        comportamento em comportamentos. Todo o conteúdo apresentado tem
         caráter <strong>ilustrativo, informativo e de entretenimento</strong> —
-        não realizamos nenhuma forma de interceptação, acesso, vinculação,
+        não realizamos nenhuma forma de sincronização, acesso, vinculação,
         acompanhamento ou acesso não autorizado a dispositivos, contas ou
         dados pessoais de terceiros.
       </p>

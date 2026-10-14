@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 /**
  * Returns the first name of the target when the user came from a CPF search.
- * Reads from sessionStorage key "zr.target.cpf" (set by /cpf-alvo).
- * Returns null when no CPF lookup was done — caller should fall back to "alvo".
+ * Reads from sessionStorage key "zr.target.cpf" (set by /cpf-responsavel).
+ * Returns null when no CPF lookup was done — caller should fall back to "dispositivo".
  */
 export function useTargetName(): string | null {
   const [name, setName] = useState<string | null>(null);
@@ -23,8 +23,8 @@ export function useTargetName(): string | null {
   return name;
 }
 
-/** Convenience: returns the first name or the fallback ("alvo" by default). */
-export function useTargetLabel(fallback = "alvo"): string {
+/** Convenience: returns the first name or the fallback ("dispositivo" by default). */
+export function useTargetLabel(fallback = "dispositivo"): string {
   const n = useTargetName();
   return n || fallback;
 }

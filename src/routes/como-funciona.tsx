@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PresellPage } from "@/components/PresellPage";
 
-export const Route = createFileRoute("/investigar")({
+export const Route = createFileRoute("/como-funciona")({
   head: () => ({
     meta: [
       { title: "Análise Social · ZapRadar Brasil" },

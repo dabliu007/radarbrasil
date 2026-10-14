@@ -7,37 +7,37 @@ import { createPixCharge, getPixStatus, type PixCharge } from "@/lib/pix.functio
 import { fbqTrackOnce, getMetaCookies, getPersistedUtms } from "@/lib/tracking";
 
 const SIGILO_AMOUNT = 89.82;
-const SIGILO_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
+const SIGILO_DESCRIPTION = "Controle Parental: Acesso Anual";
 
 const searchSchema = z.object({
   phone: z.coerce.string().optional().default(""),
   sex: z.enum(["M", "F"]).optional().default("M"),
 });
 
-export const Route = createFileRoute("/sigilo")({
+export const Route = createFileRoute("/seguranca")({
   head: () => ({
     meta: [
-      { title: "Acesso: Método da Traição" },
+      { title: "Acesso: Método Seguro" },
       {
         name: "description",
         content:
-          "Etapa de sigilo do ZapRadar Brasil: garanta o anonimato total da sua investigação e a liberação confidencial do relatório completo.",
+          "Etapa de sigilo do ZapRadar Brasil: garanta o anonimato total da sua acompanhamento e a liberação confidencial do relatório completo.",
       },
-      { property: "og:title", content: "Acesso: Método da Traição" },
+      { property: "og:title", content: "Acesso: Método Seguro" },
       {
         property: "og:description",
-        content: "Anonimato total da sua investigação e liberação confidencial do relatório.",
+        content: "Anonimato total da sua acompanhamento e liberação confidencial do relatório.",
       },
-      { property: "og:url", content: "https://zapradar.top/sigilo" },
+      { property: "og:url", content: "https://zapradar.top/seguranca" },
       { name: "robots", content: "noindex,follow" },
     ],
-    links: [{ rel: "canonical", href: "https://zapradar.top/sigilo" }],
+    links: [{ rel: "canonical", href: "https://zapradar.top/seguranca" }],
   }),
   validateSearch: (s) => searchSchema.parse(s),
-  component: SigiloPage,
+  component: SegurancaPage,
 });
 
-function SigiloPage() {
+function SegurancaPage() {
   const { phone, sex } = Route.useSearch();
   const navigate = useNavigate();
   const createPix = useServerFn(createPixCharge);
@@ -143,7 +143,7 @@ function SigiloPage() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-['Inter',sans-serif]">
       <img
-        src="/images/sigilo-hero.webp"
+        src="/images/seguranca-hero.webp"
         alt="Por que é necessário pagar a Taxa de Sigilo"
         className="w-full h-auto block"
         width={960}
@@ -171,7 +171,7 @@ function SigiloPage() {
             Acesso bloqueado
           </div>
           <p className="mt-2 text-[13px] text-red-200/90 leading-snug">
-            O celular {targetName ? `de ${targetName}` : "do alvo"} já foi vinculado, mas o painel
+            O celular {targetName ? `de ${targetName}` : "do dispositivo"} já foi vinculado, mas o painel
             está <span className="font-bold text-red-300">criptografado</span> até a liberação do
             sigilo. Sem essa etapa, o conteúdo é <span className="font-bold">apagado em 15 minutos</span>.
           </p>
@@ -190,7 +190,7 @@ function SigiloPage() {
           <ul className="mt-4 space-y-2.5 text-[13px] text-slate-300">
             <li className="flex gap-2">
               <span className="text-amber-400 shrink-0">•</span>
-              <span>{targetName ?? "O alvo"} não recebe nenhuma notificação de novo dispositivo.</span>
+              <span>{targetName ?? "O dispositivo"} não recebe nenhuma notificação de novo dispositivo.</span>
             </li>
             <li className="flex gap-2">
               <span className="text-amber-400 shrink-0">•</span>
@@ -231,7 +231,7 @@ function SigiloPage() {
             <span className="text-emerald-400 text-lg shrink-0">🛡️</span>
             <p className="text-[12px] text-emerald-200/90 leading-snug">
               <span className="font-bold">Garantia de sigilo:</span> se qualquer rastro da
-              investigação for identificado, devolvemos 100% do valor + R$500 de indenização.
+              acompanhamento for identificado, devolvemos 100% do valor + R$500 de indenização.
             </p>
           </div>
         </div>

@@ -33,7 +33,7 @@ export function SolutionsSection() {
     <section id="solucoes" className="scroll-mt-24 py-20 sm:py-28">
       <Container>
         <SectionHeading
-          eyebrow="O que você vai descobrir"
+          eyebrow="O que você vai identificar"
           title={
             <>
               Tudo que ela(e) esconde,

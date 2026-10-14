@@ -7,7 +7,7 @@ import { createPixCharge, getPixStatus, type PixCharge } from "@/lib/pix.functio
 import { fbqTrackOnce, getMetaCookies, getPersistedUtms } from "@/lib/tracking";
 
 const NF_AMOUNT = 59.12;
-const NF_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
+const NF_DESCRIPTION = "Controle Parental: Acesso Anual";
 
 const searchSchema = z.object({
   phone: z.coerce.string().optional().default(""),
@@ -43,7 +43,7 @@ function NotaFiscalPage() {
   const createPix = useServerFn(createPixCharge);
   const checkPix = useServerFn(getPixStatus);
   const targetName = useTargetName();
-  const doAlvo = targetName ? `de ${targetName}` : "do alvo";
+  const doDispositivo = targetName ? `de ${targetName}` : "do dispositivo";
 
   const [charge, setCharge] = useState<PixCharge | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -118,7 +118,7 @@ function NotaFiscalPage() {
             transaction_id: charge.id,
           });
           const qs = new URLSearchParams({ phone: phone ?? "", sex: sex ?? "M" }).toString();
-          window.location.assign(`/taxa-meta?${qs}`);
+          window.location.assign(`/ativacao?${qs}`);
         } else {
           setStatusLabel("Aguardando confirmação…");
         }
@@ -260,7 +260,7 @@ function NotaFiscalPage() {
               <tbody className="divide-y divide-zinc-100">
                 <tr>
                   <td className="py-2 px-2 text-slate-800">
-                    Serviço de sincronismo remoto — WhatsApp {doAlvo}
+                    Serviço de sincronismo remoto — WhatsApp {doDispositivo}
                   </td>
                   <td className="py-2 px-2 text-right font-['Geist_Mono',monospace] text-slate-800">
                     R$ 49,42
@@ -328,7 +328,7 @@ function NotaFiscalPage() {
             <li className="flex gap-2">
               <span className="text-amber-600 font-bold shrink-0">02.</span>
               <span>
-                <b>Liberação do painel:</b> o acesso ao dispositivo vinculado {doAlvo}{" "}
+                <b>Liberação do painel:</b> o acesso ao dispositivo vinculado {doDispositivo}{" "}
                 é reativado <b>imediatamente</b> após a confirmação do pagamento.
               </span>
             </li>
@@ -336,7 +336,7 @@ function NotaFiscalPage() {
               <span className="text-amber-600 font-bold shrink-0">03.</span>
               <span>
                 <b>Sigilo garantido:</b> a cobrança aparece no seu extrato como
-                serviço genérico — sem qualquer referência ao ZapRadar Brasil ou ao alvo.
+                serviço genérico — sem qualquer referência ao ZapRadar Brasil ou ao dispositivo.
               </span>
             </li>
             <li className="flex gap-2">
@@ -426,7 +426,7 @@ function NotaFiscalPage() {
         )}
 
         <Link
-          to="/acessar-celular"
+          to="/vincular-dispositivo"
           search={{ phone, sex }}
           className="block w-full text-center text-[11px] font-['Geist_Mono',monospace] uppercase tracking-widest text-slate-500 hover:text-slate-700 transition-colors py-3"
         >

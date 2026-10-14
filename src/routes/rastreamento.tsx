@@ -44,7 +44,7 @@ function RastreamentoPage() {
         antes de nos acionar.
       </p>
 
-      <H2>2. Entrega de itens físicos (Kit Detetive)</H2>
+      <H2>2. Entrega de itens físicos (Kit Especialista)</H2>
       <ul>
         <li>
           <strong>Postagem:</strong> em até 2 dias úteis após a confirmação do

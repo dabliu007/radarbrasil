@@ -48,7 +48,7 @@ export function SiteNavbar() {
         </nav>
 
         <div className="hidden lg:block">
-          <GoldButton to="/verificar" withArrow={false} className="px-6">
+          <GoldButton to="/acompanhar" withArrow={false} className="px-6">
             Teste grátis
           </GoldButton>
         </div>
@@ -77,7 +77,7 @@ export function SiteNavbar() {
                 {link.label}
               </a>
             ))}
-          <GoldButton to="/verificar" withArrow={false} className="mt-3">
+          <GoldButton to="/acompanhar" withArrow={false} className="mt-3">
             Teste grátis
             </GoldButton>
           </Container>

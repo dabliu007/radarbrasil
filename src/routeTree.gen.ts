@@ -10,22 +10,22 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AcessarCelularRouteImport } from './routes/acessar-celular'
+import { Route as VincularDispositivoRouteImport } from './routes/vincular-dispositivo'
 import { Route as AcessoLiberadoRouteImport } from './routes/acesso-liberado'
-import { Route as AlvoEncontradoRouteImport } from './routes/alvo-encontrado'
+import { Route as DispositivoEncontradoRouteImport } from './routes/dispositivo-encontrado'
 import { Route as CadastroDispositivoRouteImport } from './routes/cadastro-dispositivo'
 import { Route as CheckoutRouteImport } from './routes/checkout'
-import { Route as ContaPoupancaRouteImport } from './routes/conta-poupanca'
+import { Route as ControleGastosRouteImport } from './routes/controle-gastos'
 import { Route as ContatoRouteImport } from './routes/contato'
-import { Route as ControleBancarioRouteImport } from './routes/controle-bancario'
+import { Route as ControleComprasRouteImport } from './routes/controle-compras'
 import { Route as CookiesRouteImport } from './routes/cookies'
-import { Route as CpfAlvoRouteImport } from './routes/cpf-alvo'
-import { Route as CpfInputRouteImport } from './routes/cpf-input'
-import { Route as DadosAlvoRouteImport } from './routes/dados-alvo'
-import { Route as DetetivesRouteImport } from './routes/detetives'
+import { Route as CpfResponsavelRouteImport } from './routes/cpf-responsavel'
+import { Route as CpfVerificacaoRouteImport } from './routes/cpf-verificacao'
+import { Route as DadosDispositivoRouteImport } from './routes/dados-dispositivo'
+import { Route as ProtecaoRouteImport } from './routes/protecao'
 import { Route as DisclaimerRouteImport } from './routes/disclaimer'
 import { Route as GarantiaRouteImport } from './routes/garantia'
-import { Route as InvestigarRouteImport } from './routes/investigar'
+import { Route as ComoFuncionaRouteImport } from './routes/como-funciona'
 import { Route as LicencaZapradarRouteImport } from './routes/licenca-zapradar'
 import { Route as NotaFiscalRouteImport } from './routes/nota-fiscal'
 import { Route as PainelRouteImport } from './routes/painel'
@@ -35,14 +35,14 @@ import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as RastreamentoRouteImport } from './routes/rastreamento'
 import { Route as RelatorioRouteImport } from './routes/relatorio'
 import { Route as RelatorioEspecialRouteImport } from './routes/relatorio-especial'
-import { Route as SigiloRouteImport } from './routes/sigilo'
+import { Route as SegurancaRouteImport } from './routes/seguranca'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SobreRouteImport } from './routes/sobre'
-import { Route as TaxaMetaRouteImport } from './routes/taxa-meta'
+import { Route as AtivacaoRouteImport } from './routes/ativacao'
 import { Route as TermosRouteImport } from './routes/termos'
 import { Route as TrocaRouteImport } from './routes/troca'
-import { Route as VerificarRouteImport } from './routes/verificar'
-import { Route as ConversasRouteImport } from './routes/conversas'
+import { Route as AcompanharRouteImport } from './routes/acompanhar'
+import { Route as AtividadesRouteImport } from './routes/atividades'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as ApiPublicCodefyWebhookRouteImport } from './routes/api/public/codefy-webhook'
@@ -61,9 +61,9 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AcessarCelularRoute = AcessarCelularRouteImport.update({
-  id: '/acessar-celular',
-  path: '/acessar-celular',
+const VincularDispositivoRoute = VincularDispositivoRouteImport.update({
+  id: '/vincular-dispositivo',
+  path: '/vincular-dispositivo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AcessoLiberadoRoute = AcessoLiberadoRouteImport.update({
@@ -71,9 +71,9 @@ const AcessoLiberadoRoute = AcessoLiberadoRouteImport.update({
   path: '/acesso-liberado',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AlvoEncontradoRoute = AlvoEncontradoRouteImport.update({
-  id: '/alvo-encontrado',
-  path: '/alvo-encontrado',
+const DispositivoEncontradoRoute = DispositivoEncontradoRouteImport.update({
+  id: '/dispositivo-encontrado',
+  path: '/dispositivo-encontrado',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CadastroDispositivoRoute = CadastroDispositivoRouteImport.update({
@@ -86,9 +86,9 @@ const CheckoutRoute = CheckoutRouteImport.update({
   path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ContaPoupancaRoute = ContaPoupancaRouteImport.update({
-  id: '/conta-poupanca',
-  path: '/conta-poupanca',
+const ControleGastosRoute = ControleGastosRouteImport.update({
+  id: '/controle-gastos',
+  path: '/controle-gastos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContatoRoute = ContatoRouteImport.update({
@@ -96,9 +96,9 @@ const ContatoRoute = ContatoRouteImport.update({
   path: '/contato',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ControleBancarioRoute = ControleBancarioRouteImport.update({
-  id: '/controle-bancario',
-  path: '/controle-bancario',
+const ControleComprasRoute = ControleComprasRouteImport.update({
+  id: '/controle-compras',
+  path: '/controle-compras',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CookiesRoute = CookiesRouteImport.update({
@@ -106,24 +106,24 @@ const CookiesRoute = CookiesRouteImport.update({
   path: '/cookies',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CpfAlvoRoute = CpfAlvoRouteImport.update({
-  id: '/cpf-alvo',
-  path: '/cpf-alvo',
+const CpfResponsavelRoute = CpfResponsavelRouteImport.update({
+  id: '/cpf-responsavel',
+  path: '/cpf-responsavel',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CpfInputRoute = CpfInputRouteImport.update({
-  id: '/cpf-input',
-  path: '/cpf-input',
+const CpfVerificacaoRoute = CpfVerificacaoRouteImport.update({
+  id: '/cpf-verificacao',
+  path: '/cpf-verificacao',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DadosAlvoRoute = DadosAlvoRouteImport.update({
-  id: '/dados-alvo',
-  path: '/dados-alvo',
+const DadosDispositivoRoute = DadosDispositivoRouteImport.update({
+  id: '/dados-dispositivo',
+  path: '/dados-dispositivo',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DetetivesRoute = DetetivesRouteImport.update({
-  id: '/detetives',
-  path: '/detetives',
+const ProtecaoRoute = ProtecaoRouteImport.update({
+  id: '/protecao',
+  path: '/protecao',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DisclaimerRoute = DisclaimerRouteImport.update({
@@ -136,9 +136,9 @@ const GarantiaRoute = GarantiaRouteImport.update({
   path: '/garantia',
   getParentRoute: () => rootRouteImport,
 } as any)
-const InvestigarRoute = InvestigarRouteImport.update({
-  id: '/investigar',
-  path: '/investigar',
+const ComoFuncionaRoute = ComoFuncionaRouteImport.update({
+  id: '/como-funciona',
+  path: '/como-funciona',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LicencaZapradarRoute = LicencaZapradarRouteImport.update({
@@ -186,9 +186,9 @@ const RelatorioEspecialRoute = RelatorioEspecialRouteImport.update({
   path: '/relatorio-especial',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SigiloRoute = SigiloRouteImport.update({
-  id: '/sigilo',
-  path: '/sigilo',
+const SegurancaRoute = SegurancaRouteImport.update({
+  id: '/seguranca',
+  path: '/seguranca',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -201,9 +201,9 @@ const SobreRoute = SobreRouteImport.update({
   path: '/sobre',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TaxaMetaRoute = TaxaMetaRouteImport.update({
-  id: '/taxa-meta',
-  path: '/taxa-meta',
+const AtivacaoRoute = AtivacaoRouteImport.update({
+  id: '/ativacao',
+  path: '/ativacao',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermosRoute = TermosRouteImport.update({
@@ -216,14 +216,14 @@ const TrocaRoute = TrocaRouteImport.update({
   path: '/troca',
   getParentRoute: () => rootRouteImport,
 } as any)
-const VerificarRoute = VerificarRouteImport.update({
-  id: '/verificar',
-  path: '/verificar',
+const AcompanharRoute = AcompanharRouteImport.update({
+  id: '/acompanhar',
+  path: '/acompanhar',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ConversasRoute = ConversasRouteImport.update({
-  id: '/conversas',
-  path: '/conversas',
+const AtividadesRoute = AtividadesRouteImport.update({
+  id: '/atividades',
+  path: '/atividades',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
@@ -294,22 +294,22 @@ const ApiPublicVizzionWebhookRoute = ApiPublicVizzionWebhookRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/acessar-celular': typeof AcessarCelularRoute
+  '/vincular-dispositivo': typeof VincularDispositivoRoute
   '/acesso-liberado': typeof AcessoLiberadoRoute
-  '/alvo-encontrado': typeof AlvoEncontradoRoute
+  '/dispositivo-encontrado': typeof DispositivoEncontradoRoute
   '/cadastro-dispositivo': typeof CadastroDispositivoRoute
   '/checkout': typeof CheckoutRoute
-  '/conta-poupanca': typeof ContaPoupancaRoute
+  '/controle-gastos': typeof ControleGastosRoute
   '/contato': typeof ContatoRoute
-  '/controle-bancario': typeof ControleBancarioRoute
+  '/controle-compras': typeof ControleComprasRoute
   '/cookies': typeof CookiesRoute
-  '/cpf-alvo': typeof CpfAlvoRoute
-  '/cpf-input': typeof CpfInputRoute
-  '/dados-alvo': typeof DadosAlvoRoute
-  '/detetives': typeof DetetivesRoute
+  '/cpf-responsavel': typeof CpfResponsavelRoute
+  '/cpf-verificacao': typeof CpfVerificacaoRoute
+  '/dados-dispositivo': typeof DadosDispositivoRoute
+  '/protecao': typeof ProtecaoRoute
   '/disclaimer': typeof DisclaimerRoute
   '/garantia': typeof GarantiaRoute
-  '/investigar': typeof InvestigarRoute
+  '/como-funciona': typeof ComoFuncionaRoute
   '/licenca-zapradar': typeof LicencaZapradarRoute
   '/nota-fiscal': typeof NotaFiscalRoute
   '/painel': typeof PainelRoute
@@ -319,14 +319,14 @@ export interface FileRoutesByFullPath {
   '/rastreamento': typeof RastreamentoRoute
   '/relatorio': typeof RelatorioRoute
   '/relatorio-especial': typeof RelatorioEspecialRoute
-  '/sigilo': typeof SigiloRoute
+  '/seguranca': typeof SegurancaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
-  '/taxa-meta': typeof TaxaMetaRoute
+  '/ativacao': typeof AtivacaoRoute
   '/termos': typeof TermosRoute
   '/troca': typeof TrocaRoute
-  '/verificar': typeof VerificarRoute
-  '/conversas': typeof ConversasRoute
+  '/acompanhar': typeof AcompanharRoute
+  '/atividades': typeof AtividadesRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/api/public/codefy-webhook': typeof ApiPublicCodefyWebhookRoute
@@ -342,22 +342,22 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/acessar-celular': typeof AcessarCelularRoute
+  '/vincular-dispositivo': typeof VincularDispositivoRoute
   '/acesso-liberado': typeof AcessoLiberadoRoute
-  '/alvo-encontrado': typeof AlvoEncontradoRoute
+  '/dispositivo-encontrado': typeof DispositivoEncontradoRoute
   '/cadastro-dispositivo': typeof CadastroDispositivoRoute
   '/checkout': typeof CheckoutRoute
-  '/conta-poupanca': typeof ContaPoupancaRoute
+  '/controle-gastos': typeof ControleGastosRoute
   '/contato': typeof ContatoRoute
-  '/controle-bancario': typeof ControleBancarioRoute
+  '/controle-compras': typeof ControleComprasRoute
   '/cookies': typeof CookiesRoute
-  '/cpf-alvo': typeof CpfAlvoRoute
-  '/cpf-input': typeof CpfInputRoute
-  '/dados-alvo': typeof DadosAlvoRoute
-  '/detetives': typeof DetetivesRoute
+  '/cpf-responsavel': typeof CpfResponsavelRoute
+  '/cpf-verificacao': typeof CpfVerificacaoRoute
+  '/dados-dispositivo': typeof DadosDispositivoRoute
+  '/protecao': typeof ProtecaoRoute
   '/disclaimer': typeof DisclaimerRoute
   '/garantia': typeof GarantiaRoute
-  '/investigar': typeof InvestigarRoute
+  '/como-funciona': typeof ComoFuncionaRoute
   '/licenca-zapradar': typeof LicencaZapradarRoute
   '/nota-fiscal': typeof NotaFiscalRoute
   '/painel': typeof PainelRoute
@@ -367,14 +367,14 @@ export interface FileRoutesByTo {
   '/rastreamento': typeof RastreamentoRoute
   '/relatorio': typeof RelatorioRoute
   '/relatorio-especial': typeof RelatorioEspecialRoute
-  '/sigilo': typeof SigiloRoute
+  '/seguranca': typeof SegurancaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
-  '/taxa-meta': typeof TaxaMetaRoute
+  '/ativacao': typeof AtivacaoRoute
   '/termos': typeof TermosRoute
   '/troca': typeof TrocaRoute
-  '/verificar': typeof VerificarRoute
-  '/conversas': typeof ConversasRoute
+  '/acompanhar': typeof AcompanharRoute
+  '/atividades': typeof AtividadesRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog': typeof BlogIndexRoute
   '/api/public/codefy-webhook': typeof ApiPublicCodefyWebhookRoute
@@ -391,22 +391,22 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/acessar-celular': typeof AcessarCelularRoute
+  '/vincular-dispositivo': typeof VincularDispositivoRoute
   '/acesso-liberado': typeof AcessoLiberadoRoute
-  '/alvo-encontrado': typeof AlvoEncontradoRoute
+  '/dispositivo-encontrado': typeof DispositivoEncontradoRoute
   '/cadastro-dispositivo': typeof CadastroDispositivoRoute
   '/checkout': typeof CheckoutRoute
-  '/conta-poupanca': typeof ContaPoupancaRoute
+  '/controle-gastos': typeof ControleGastosRoute
   '/contato': typeof ContatoRoute
-  '/controle-bancario': typeof ControleBancarioRoute
+  '/controle-compras': typeof ControleComprasRoute
   '/cookies': typeof CookiesRoute
-  '/cpf-alvo': typeof CpfAlvoRoute
-  '/cpf-input': typeof CpfInputRoute
-  '/dados-alvo': typeof DadosAlvoRoute
-  '/detetives': typeof DetetivesRoute
+  '/cpf-responsavel': typeof CpfResponsavelRoute
+  '/cpf-verificacao': typeof CpfVerificacaoRoute
+  '/dados-dispositivo': typeof DadosDispositivoRoute
+  '/protecao': typeof ProtecaoRoute
   '/disclaimer': typeof DisclaimerRoute
   '/garantia': typeof GarantiaRoute
-  '/investigar': typeof InvestigarRoute
+  '/como-funciona': typeof ComoFuncionaRoute
   '/licenca-zapradar': typeof LicencaZapradarRoute
   '/nota-fiscal': typeof NotaFiscalRoute
   '/painel': typeof PainelRoute
@@ -416,14 +416,14 @@ export interface FileRoutesById {
   '/rastreamento': typeof RastreamentoRoute
   '/relatorio': typeof RelatorioRoute
   '/relatorio-especial': typeof RelatorioEspecialRoute
-  '/sigilo': typeof SigiloRoute
+  '/seguranca': typeof SegurancaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
-  '/taxa-meta': typeof TaxaMetaRoute
+  '/ativacao': typeof AtivacaoRoute
   '/termos': typeof TermosRoute
   '/troca': typeof TrocaRoute
-  '/verificar': typeof VerificarRoute
-  '/conversas': typeof ConversasRoute
+  '/acompanhar': typeof AcompanharRoute
+  '/atividades': typeof AtividadesRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/api/public/codefy-webhook': typeof ApiPublicCodefyWebhookRoute
@@ -441,22 +441,22 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/acessar-celular'
+    | '/vincular-dispositivo'
     | '/acesso-liberado'
-    | '/alvo-encontrado'
+    | '/dispositivo-encontrado'
     | '/cadastro-dispositivo'
     | '/checkout'
-    | '/conta-poupanca'
+    | '/controle-gastos'
     | '/contato'
-    | '/controle-bancario'
+    | '/controle-compras'
     | '/cookies'
-    | '/cpf-alvo'
-    | '/cpf-input'
-    | '/dados-alvo'
-    | '/detetives'
+    | '/cpf-responsavel'
+    | '/cpf-verificacao'
+    | '/dados-dispositivo'
+    | '/protecao'
     | '/disclaimer'
     | '/garantia'
-    | '/investigar'
+    | '/como-funciona'
     | '/licenca-zapradar'
     | '/nota-fiscal'
     | '/painel'
@@ -466,14 +466,14 @@ export interface FileRouteTypes {
     | '/rastreamento'
     | '/relatorio'
     | '/relatorio-especial'
-    | '/sigilo'
+    | '/seguranca'
     | '/sitemap.xml'
     | '/sobre'
-    | '/taxa-meta'
+    | '/ativacao'
     | '/termos'
     | '/troca'
-    | '/verificar'
-    | '/conversas'
+    | '/acompanhar'
+    | '/atividades'
     | '/blog/$slug'
     | '/blog/'
     | '/api/public/codefy-webhook'
@@ -489,22 +489,22 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/acessar-celular'
+    | '/vincular-dispositivo'
     | '/acesso-liberado'
-    | '/alvo-encontrado'
+    | '/dispositivo-encontrado'
     | '/cadastro-dispositivo'
     | '/checkout'
-    | '/conta-poupanca'
+    | '/controle-gastos'
     | '/contato'
-    | '/controle-bancario'
+    | '/controle-compras'
     | '/cookies'
-    | '/cpf-alvo'
-    | '/cpf-input'
-    | '/dados-alvo'
-    | '/detetives'
+    | '/cpf-responsavel'
+    | '/cpf-verificacao'
+    | '/dados-dispositivo'
+    | '/protecao'
     | '/disclaimer'
     | '/garantia'
-    | '/investigar'
+    | '/como-funciona'
     | '/licenca-zapradar'
     | '/nota-fiscal'
     | '/painel'
@@ -514,14 +514,14 @@ export interface FileRouteTypes {
     | '/rastreamento'
     | '/relatorio'
     | '/relatorio-especial'
-    | '/sigilo'
+    | '/seguranca'
     | '/sitemap.xml'
     | '/sobre'
-    | '/taxa-meta'
+    | '/ativacao'
     | '/termos'
     | '/troca'
-    | '/verificar'
-    | '/conversas'
+    | '/acompanhar'
+    | '/atividades'
     | '/blog/$slug'
     | '/blog'
     | '/api/public/codefy-webhook'
@@ -537,22 +537,22 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/acessar-celular'
+    | '/vincular-dispositivo'
     | '/acesso-liberado'
-    | '/alvo-encontrado'
+    | '/dispositivo-encontrado'
     | '/cadastro-dispositivo'
     | '/checkout'
-    | '/conta-poupanca'
+    | '/controle-gastos'
     | '/contato'
-    | '/controle-bancario'
+    | '/controle-compras'
     | '/cookies'
-    | '/cpf-alvo'
-    | '/cpf-input'
-    | '/dados-alvo'
-    | '/detetives'
+    | '/cpf-responsavel'
+    | '/cpf-verificacao'
+    | '/dados-dispositivo'
+    | '/protecao'
     | '/disclaimer'
     | '/garantia'
-    | '/investigar'
+    | '/como-funciona'
     | '/licenca-zapradar'
     | '/nota-fiscal'
     | '/painel'
@@ -562,14 +562,14 @@ export interface FileRouteTypes {
     | '/rastreamento'
     | '/relatorio'
     | '/relatorio-especial'
-    | '/sigilo'
+    | '/seguranca'
     | '/sitemap.xml'
     | '/sobre'
-    | '/taxa-meta'
+    | '/ativacao'
     | '/termos'
     | '/troca'
-    | '/verificar'
-    | '/conversas'
+    | '/acompanhar'
+    | '/atividades'
     | '/blog/$slug'
     | '/blog/'
     | '/api/public/codefy-webhook'
@@ -586,22 +586,22 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AcessarCelularRoute: typeof AcessarCelularRoute
+  VincularDispositivoRoute: typeof VincularDispositivoRoute
   AcessoLiberadoRoute: typeof AcessoLiberadoRoute
-  AlvoEncontradoRoute: typeof AlvoEncontradoRoute
+  DispositivoEncontradoRoute: typeof DispositivoEncontradoRoute
   CadastroDispositivoRoute: typeof CadastroDispositivoRoute
   CheckoutRoute: typeof CheckoutRoute
-  ContaPoupancaRoute: typeof ContaPoupancaRoute
+  ControleGastosRoute: typeof ControleGastosRoute
   ContatoRoute: typeof ContatoRoute
-  ControleBancarioRoute: typeof ControleBancarioRoute
+  ControleComprasRoute: typeof ControleComprasRoute
   CookiesRoute: typeof CookiesRoute
-  CpfAlvoRoute: typeof CpfAlvoRoute
-  CpfInputRoute: typeof CpfInputRoute
-  DadosAlvoRoute: typeof DadosAlvoRoute
-  DetetivesRoute: typeof DetetivesRoute
+  CpfResponsavelRoute: typeof CpfResponsavelRoute
+  CpfVerificacaoRoute: typeof CpfVerificacaoRoute
+  DadosDispositivoRoute: typeof DadosDispositivoRoute
+  ProtecaoRoute: typeof ProtecaoRoute
   DisclaimerRoute: typeof DisclaimerRoute
   GarantiaRoute: typeof GarantiaRoute
-  InvestigarRoute: typeof InvestigarRoute
+  ComoFuncionaRoute: typeof ComoFuncionaRoute
   LicencaZapradarRoute: typeof LicencaZapradarRoute
   NotaFiscalRoute: typeof NotaFiscalRoute
   PainelRoute: typeof PainelRoute
@@ -611,14 +611,14 @@ export interface RootRouteChildren {
   RastreamentoRoute: typeof RastreamentoRoute
   RelatorioRoute: typeof RelatorioRoute
   RelatorioEspecialRoute: typeof RelatorioEspecialRoute
-  SigiloRoute: typeof SigiloRoute
+  SegurancaRoute: typeof SegurancaRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreRoute: typeof SobreRoute
-  TaxaMetaRoute: typeof TaxaMetaRoute
+  AtivacaoRoute: typeof AtivacaoRoute
   TermosRoute: typeof TermosRoute
   TrocaRoute: typeof TrocaRoute
-  VerificarRoute: typeof VerificarRoute
-  ConversasRoute: typeof ConversasRoute
+  AcompanharRoute: typeof AcompanharRoute
+  AtividadesRoute: typeof AtividadesRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
   ApiPublicCodefyWebhookRoute: typeof ApiPublicCodefyWebhookRoute
@@ -642,11 +642,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/acessar-celular': {
-      id: '/acessar-celular'
-      path: '/acessar-celular'
-      fullPath: '/acessar-celular'
-      preLoaderRoute: typeof AcessarCelularRouteImport
+    '/vincular-dispositivo': {
+      id: '/vincular-dispositivo'
+      path: '/vincular-dispositivo'
+      fullPath: '/vincular-dispositivo'
+      preLoaderRoute: typeof VincularDispositivoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/acesso-liberado': {
@@ -656,11 +656,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AcessoLiberadoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/alvo-encontrado': {
-      id: '/alvo-encontrado'
-      path: '/alvo-encontrado'
-      fullPath: '/alvo-encontrado'
-      preLoaderRoute: typeof AlvoEncontradoRouteImport
+    '/dispositivo-encontrado': {
+      id: '/dispositivo-encontrado'
+      path: '/dispositivo-encontrado'
+      fullPath: '/dispositivo-encontrado'
+      preLoaderRoute: typeof DispositivoEncontradoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cadastro-dispositivo': {
@@ -677,11 +677,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/conta-poupanca': {
-      id: '/conta-poupanca'
-      path: '/conta-poupanca'
-      fullPath: '/conta-poupanca'
-      preLoaderRoute: typeof ContaPoupancaRouteImport
+    '/controle-gastos': {
+      id: '/controle-gastos'
+      path: '/controle-gastos'
+      fullPath: '/controle-gastos'
+      preLoaderRoute: typeof ControleGastosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contato': {
@@ -691,11 +691,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContatoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/controle-bancario': {
-      id: '/controle-bancario'
-      path: '/controle-bancario'
-      fullPath: '/controle-bancario'
-      preLoaderRoute: typeof ControleBancarioRouteImport
+    '/controle-compras': {
+      id: '/controle-compras'
+      path: '/controle-compras'
+      fullPath: '/controle-compras'
+      preLoaderRoute: typeof ControleComprasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cookies': {
@@ -705,32 +705,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CookiesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/cpf-alvo': {
-      id: '/cpf-alvo'
-      path: '/cpf-alvo'
-      fullPath: '/cpf-alvo'
-      preLoaderRoute: typeof CpfAlvoRouteImport
+    '/cpf-responsavel': {
+      id: '/cpf-responsavel'
+      path: '/cpf-responsavel'
+      fullPath: '/cpf-responsavel'
+      preLoaderRoute: typeof CpfResponsavelRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/cpf-input': {
-      id: '/cpf-input'
-      path: '/cpf-input'
-      fullPath: '/cpf-input'
-      preLoaderRoute: typeof CpfInputRouteImport
+    '/cpf-verificacao': {
+      id: '/cpf-verificacao'
+      path: '/cpf-verificacao'
+      fullPath: '/cpf-verificacao'
+      preLoaderRoute: typeof CpfVerificacaoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/dados-alvo': {
-      id: '/dados-alvo'
-      path: '/dados-alvo'
-      fullPath: '/dados-alvo'
-      preLoaderRoute: typeof DadosAlvoRouteImport
+    '/dados-dispositivo': {
+      id: '/dados-dispositivo'
+      path: '/dados-dispositivo'
+      fullPath: '/dados-dispositivo'
+      preLoaderRoute: typeof DadosDispositivoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/detetives': {
-      id: '/detetives'
-      path: '/detetives'
-      fullPath: '/detetives'
-      preLoaderRoute: typeof DetetivesRouteImport
+    '/protecao': {
+      id: '/protecao'
+      path: '/protecao'
+      fullPath: '/protecao'
+      preLoaderRoute: typeof ProtecaoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/disclaimer': {
@@ -747,11 +747,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GarantiaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/investigar': {
-      id: '/investigar'
-      path: '/investigar'
-      fullPath: '/investigar'
-      preLoaderRoute: typeof InvestigarRouteImport
+    '/como-funciona': {
+      id: '/como-funciona'
+      path: '/como-funciona'
+      fullPath: '/como-funciona'
+      preLoaderRoute: typeof ComoFuncionaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/licenca-zapradar': {
@@ -817,11 +817,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RelatorioEspecialRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sigilo': {
-      id: '/sigilo'
-      path: '/sigilo'
-      fullPath: '/sigilo'
-      preLoaderRoute: typeof SigiloRouteImport
+    '/seguranca': {
+      id: '/seguranca'
+      path: '/seguranca'
+      fullPath: '/seguranca'
+      preLoaderRoute: typeof SegurancaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -838,11 +838,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SobreRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/taxa-meta': {
-      id: '/taxa-meta'
-      path: '/taxa-meta'
-      fullPath: '/taxa-meta'
-      preLoaderRoute: typeof TaxaMetaRouteImport
+    '/ativacao': {
+      id: '/ativacao'
+      path: '/ativacao'
+      fullPath: '/ativacao'
+      preLoaderRoute: typeof AtivacaoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/termos': {
@@ -859,18 +859,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrocaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/verificar': {
-      id: '/verificar'
-      path: '/verificar'
-      fullPath: '/verificar'
-      preLoaderRoute: typeof VerificarRouteImport
+    '/acompanhar': {
+      id: '/acompanhar'
+      path: '/acompanhar'
+      fullPath: '/acompanhar'
+      preLoaderRoute: typeof AcompanharRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/conversas': {
-      id: '/conversas'
-      path: '/conversas'
-      fullPath: '/conversas'
-      preLoaderRoute: typeof ConversasRouteImport
+    '/atividades': {
+      id: '/atividades'
+      path: '/atividades'
+      fullPath: '/atividades'
+      preLoaderRoute: typeof AtividadesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/': {
@@ -962,22 +962,22 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AcessarCelularRoute: AcessarCelularRoute,
+  VincularDispositivoRoute: VincularDispositivoRoute,
   AcessoLiberadoRoute: AcessoLiberadoRoute,
-  AlvoEncontradoRoute: AlvoEncontradoRoute,
+  DispositivoEncontradoRoute: DispositivoEncontradoRoute,
   CadastroDispositivoRoute: CadastroDispositivoRoute,
   CheckoutRoute: CheckoutRoute,
-  ContaPoupancaRoute: ContaPoupancaRoute,
+  ControleGastosRoute: ControleGastosRoute,
   ContatoRoute: ContatoRoute,
-  ControleBancarioRoute: ControleBancarioRoute,
+  ControleComprasRoute: ControleComprasRoute,
   CookiesRoute: CookiesRoute,
-  CpfAlvoRoute: CpfAlvoRoute,
-  CpfInputRoute: CpfInputRoute,
-  DadosAlvoRoute: DadosAlvoRoute,
-  DetetivesRoute: DetetivesRoute,
+  CpfResponsavelRoute: CpfResponsavelRoute,
+  CpfVerificacaoRoute: CpfVerificacaoRoute,
+  DadosDispositivoRoute: DadosDispositivoRoute,
+  ProtecaoRoute: ProtecaoRoute,
   DisclaimerRoute: DisclaimerRoute,
   GarantiaRoute: GarantiaRoute,
-  InvestigarRoute: InvestigarRoute,
+  ComoFuncionaRoute: ComoFuncionaRoute,
   LicencaZapradarRoute: LicencaZapradarRoute,
   NotaFiscalRoute: NotaFiscalRoute,
   PainelRoute: PainelRoute,
@@ -987,14 +987,14 @@ const rootRouteChildren: RootRouteChildren = {
   RastreamentoRoute: RastreamentoRoute,
   RelatorioRoute: RelatorioRoute,
   RelatorioEspecialRoute: RelatorioEspecialRoute,
-  SigiloRoute: SigiloRoute,
+  SegurancaRoute: SegurancaRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreRoute: SobreRoute,
-  TaxaMetaRoute: TaxaMetaRoute,
+  AtivacaoRoute: AtivacaoRoute,
   TermosRoute: TermosRoute,
   TrocaRoute: TrocaRoute,
-  VerificarRoute: VerificarRoute,
-  ConversasRoute: ConversasRoute,
+  AcompanharRoute: AcompanharRoute,
+  AtividadesRoute: AtividadesRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
   ApiPublicCodefyWebhookRoute: ApiPublicCodefyWebhookRoute,

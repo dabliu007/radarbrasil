@@ -179,7 +179,7 @@ export const Route = createFileRoute("/api/public/imperium-webhook")({
                 status: "paid",
                 amount: finalAmount,
                 productId: utmifyOrderId,
-                productName: existingRaw?.product_name || "Recupera Relacionamento: Acesso Anual",
+                productName: existingRaw?.product_name || "Controle Parental: Acesso Anual",
                 createdAt: existingRaw?.utmify_created_at || existing?.created_at || new Date(),
                 approvedDate: new Date(),
                 customer: {

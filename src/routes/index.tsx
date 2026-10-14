@@ -1,41 +1,41 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { VerificarPage } from "@/routes/verificar";
+import { AcompanharPage } from "@/routes/acompanhar";
 
 const SITE_URL = "https://zapradar.top";
 
-const TITLE = "Zap Radar Brasil: Descubra Traição em 5 Minutos (ZapRadar)";
+const TITLE = "Zap Radar Brasil: Identifique Risco em 5 Minutos (ZapRadar)";
 
 const DESCRIPTION =
-  "Zap Radar Brasil: descubra traição em 5 minutos informando apenas o número do WhatsApp. Veja conversas apagadas, fotos ocultas, áudios e localização em tempo real, 100% sigiloso.";
+  "Zap Radar Brasil: identifique risco em 5 minutos informando apenas o número do WhatsApp. Veja conversas apagadas, fotos ocultas, áudios e localização em tempo real, 100% sigiloso.";
 
 const KEYWORDS = [
   "ZapRadar Brasil",
   "ZapRadar",
   "ZapRadar",
   "ZapRadar",
-  "descobrir traição",
-  "como descobrir traição",
-  "descobrir traição pelo whatsapp",
-  "descobrir traição do marido",
-  "descobrir traição da esposa",
+  "identificar risco",
+  "como identificar risco",
+  "identificar risco pelo whatsapp",
+  "identificar risco do filho",
+  "identificar risco da filha",
   "sincronizar whatsapp",
   "como sincronizar whatsapp",
-  "sincronizar whatsapp do parceiro",
+  "sincronizar whatsapp do filho",
   "sincronizar celular",
   "acessar whatsapp",
   "como acessar whatsapp",
   "app para acessar whatsapp",
-  "acessar o whatsapp do marido",
-  "acessar o whatsapp da esposa",
+  "acessar o whatsapp do filho",
+  "acessar o whatsapp da filha",
   "acessar celular",
-  "como acessar celular do marido",
-  "como acessar celular da esposa",
-  "acessar celular do namorado",
-  "acessar celular da namorada",
+  "como acessar celular do filho",
+  "como acessar celular da filha",
+  "acessar celular do filho",
+  "acessar celular da filha",
   "acessar whatsapp",
   "como acessar whatsapp",
-  "acessar whatsapp do namorado",
-  "acessar whatsapp da namorada",
+  "acessar whatsapp do filho",
+  "acessar whatsapp da filha",
   "acessar redes sociais",
   "acessar instagram",
   "acessar facebook",
@@ -59,7 +59,7 @@ export const Route = createFileRoute("/")({
       { property: "og:image", content: `${SITE_URL}/og-image.png` },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "ZapRadar Brasil - Descubra a verdade pelo WhatsApp" },
+      { property: "og:image:alt", content: "ZapRadar Brasil - Proteja seu filho" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
@@ -79,7 +79,7 @@ export const Route = createFileRoute("/")({
           description: DESCRIPTION,
           potentialAction: {
             "@type": "SearchAction",
-            target: `${SITE_URL}/verificar?phone={search_term_string}`,
+            target: `${SITE_URL}/acompanhar?phone={search_term_string}`,
             "query-input": "required name=search_term_string",
           },
         }),
@@ -117,18 +117,18 @@ export const Route = createFileRoute("/")({
           mainEntity: [
             {
               "@type": "Question",
-              name: "Como acessar o celular do marido?",
+              name: "Como acessar o celular do filho?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "No ZapRadar Brasil você informa o número do WhatsApp do seu marido e recebe o sincronismo com conversas apagadas, fotos ocultas, áudios e localização em tempo real em poucos minutos, sem que ele receba qualquer notificação.",
+                text: "No ZapRadar Brasil você informa o número do WhatsApp do seu filho e recebe o sincronismo com conversas apagadas, fotos ocultas, áudios e localização em tempo real em poucos minutos, sem que ele receba qualquer notificação.",
               },
             },
             {
               "@type": "Question",
-              name: "Como acessar o celular da esposa?",
+              name: "Como acessar o celular da filha?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Basta digitar o número do WhatsApp da sua esposa no ZapRadar Brasil. O sistema faz a verificação e libera o painel com mensagens apagadas, mídias escondidas e histórico de localização, com sigilo total.",
+                text: "Basta digitar o número do WhatsApp da sua filha no ZapRadar Brasil. O sistema faz a verificação e libera o painel com mensagens apagadas, mídias escondidas e histórico de localização, com sigilo total.",
               },
             },
             {
@@ -136,15 +136,15 @@ export const Route = createFileRoute("/")({
               name: "O que é o ZapRadar / ZapRadar Brasil?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Zap Radar é o nome da plataforma que sincroniza o WhatsApp do parceiro(a) e mostra conversas, fotos, áudios e localização em um painel único.",
+                text: "Zap Radar é o nome da plataforma que sincroniza o WhatsApp do filho(a) e mostra conversas, fotos, áudios e localização em um painel único.",
               },
             },
             {
               "@type": "Question",
-              name: "A pessoa descobre que o celular foi vinculado?",
+              name: "A pessoa é notificada que o celular foi vinculado?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Não. O processo do ZapRadar Brasil é 100% sigiloso: nenhuma notificação, mensagem ou aviso aparece no aparelho do alvo durante ou depois da verificação.",
+                text: "Não. O processo do ZapRadar Brasil é 100% sigiloso: nenhuma notificação, mensagem ou aviso aparece no aparelho do dispositivo durante ou depois da verificação.",
               },
             },
             {
@@ -168,7 +168,7 @@ export const Route = createFileRoute("/")({
               name: "Como sincronizar o WhatsApp de outra pessoa?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Com o ZapRadar Brasil você sincroniza o WhatsApp a partir do número do parceiro(a): o sistema sincroniza as conversas, fotos, áudios e status em um painel sincronizado que você acompanha em tempo real, sem instalar nada no celular do alvo.",
+                text: "Com o ZapRadar Brasil você sincroniza o WhatsApp a partir do número do filho(a): o sistema sincroniza as conversas, fotos, áudios e status em um painel sincronizado que você acompanha em tempo real, sem instalar nada no celular do dispositivo.",
               },
             },
             {
@@ -181,10 +181,10 @@ export const Route = createFileRoute("/")({
             },
             {
               "@type": "Question",
-              name: "Como acessar o WhatsApp do namorado ou da namorada?",
+              name: "Como acessar o WhatsApp do filho ou da filha?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "O termo popular 'acessar WhatsApp' se refere ao sincronismo feito pelo ZapRadar Brasil: você acessa as conversas do namorado(a) informando apenas o número, sem acesso e sem que a pessoa receba qualquer aviso no aparelho.",
+                text: "O termo popular 'acessar WhatsApp' se refere ao sincronismo feito pelo ZapRadar Brasil: você acessa as conversas do filho(a) informando apenas o número, sem acesso e sem que a pessoa receba qualquer aviso no aparelho.",
               },
             },
             {
@@ -192,15 +192,15 @@ export const Route = createFileRoute("/")({
               name: "Dá para acessar ou acompanhar redes sociais como Instagram e Facebook?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Sim. Além do WhatsApp, o ZapRadar Brasil reúne informações públicas e atividade de redes sociais como Instagram e Facebook Messenger ligadas ao número investigado, em um único relatório.",
+                text: "Sim. Além do WhatsApp, o ZapRadar Brasil reúne informações públicas e atividade de redes sociais como Instagram e Facebook Messenger ligadas ao número acompanhado, em um único relatório.",
               },
             },
             {
               "@type": "Question",
-              name: "Como acessar o celular do marido ou da esposa?",
+              name: "Como acessar o celular do filho ou da filha?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Acessar o celular no ZapRadar Brasil significa sincronizar o conteúdo do WhatsApp e das redes sociais a partir do número. Em poucos minutos você recebe conversas apagadas, fotos ocultas, áudios e localização, sem que o marido ou a esposa desconfie.",
+                text: "Acessar o celular no ZapRadar Brasil significa sincronizar o conteúdo do WhatsApp e das redes sociais a partir do número. Em poucos minutos você recebe conversas apagadas, fotos ocultas, áudios e localização, de forma transparente.",
               },
             },
           ],
@@ -208,5 +208,5 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
-  component: VerificarPage,
+  component: AcompanharPage,
 });

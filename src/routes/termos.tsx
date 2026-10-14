@@ -32,7 +32,7 @@ function TermosPage() {
       (dezoito) anos. As demonstrações, prints, áudios, vídeos e relatórios
       exibidos na plataforma têm caráter <strong>ilustrativo e ficcional</strong>,
       sendo utilizados para fins de apresentação de conteúdo, análise
-      comportamental e reflexão sobre relacionamentos.
+      comportamental e reflexão sobre comportamentos.
     </p>
     <p>
       O ZapRadar Brasil <strong>não</strong> intercepta, clona, invade, acompanha ou

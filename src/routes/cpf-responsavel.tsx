@@ -10,18 +10,18 @@ const searchSchema = z.object({
   phone: z.union([z.string(), z.number()]).optional().transform((v) => (v == null ? "" : String(v))),
 });
 
-export const Route = createFileRoute("/cpf-alvo")({
+export const Route = createFileRoute("/cpf-responsavel")({
   head: () => ({
     meta: [
-      { title: "Adicionar CPF do alvo · ZapRadar Brasil" },
+      { title: "Adicionar CPF do dispositivo · ZapRadar Brasil" },
       { name: "robots", content: "noindex,nofollow" },
     ],
   }),
   validateSearch: (s) => searchSchema.parse(s),
-  component: CpfAlvoPage,
+  component: CpfResponsavelPage,
 });
 
-function CpfAlvoPage() {
+function CpfResponsavelPage() {
   const { phone } = Route.useSearch();
   const navigate = useNavigate();
   const callCpf = useServerFn(consultCpf);
@@ -68,7 +68,7 @@ function CpfAlvoPage() {
         );
       } catch {}
       navigate({
-        to: "/alvo-encontrado",
+        to: "/dispositivo-encontrado",
         search: { phone, cpf: digits } as any,
       });
     } catch (e: any) {
@@ -98,7 +98,7 @@ function CpfAlvoPage() {
             <div className="text-[10px] uppercase tracking-[0.2em] text-yellow-400/80 font-['Geist_Mono',monospace]">
               Etapa opcional · Precisão máxima
             </div>
-            <div className="text-base font-extrabold">Adicionar CPF do alvo</div>
+            <div className="text-base font-extrabold">Adicionar CPF do dispositivo</div>
           </div>
         </div>
 
@@ -118,7 +118,7 @@ function CpfAlvoPage() {
           </div>
 
           <p className="text-[14px] text-slate-700 leading-relaxed">
-            Com o <span className="text-amber-300 font-semibold">CPF do alvo</span>, conseguimos cruzar bases públicas e privadas e desbloquear informações que ele <span className="font-semibold text-zinc-100">tenta esconder de você</span>:
+            Com o <span className="text-amber-300 font-semibold">CPF do dispositivo</span>, conseguimos cruzar bases públicas e privadas e desbloquear informações que <span className="font-semibold text-zinc-100">merecem atenção</span>:
           </p>
 
           <ul className="space-y-2">
@@ -127,7 +127,7 @@ function CpfAlvoPage() {
               { icon: "🧾", txt: "Histórico de faturas em estabelecimentos adultos" },
               { icon: "🏨", txt: "Reservas em motéis, hotéis e pousadas" },
               { icon: "📍", txt: "Endereços frequentes e locais visitados" },
-              { icon: "💍", txt: "Cadastros em apps de relacionamento e swing" },
+              { icon: "💍", txt: "Cadastros em apps de namoro e swing" },
             ].map((it, i) => (
               <li
                 key={i}
@@ -140,12 +140,12 @@ function CpfAlvoPage() {
           </ul>
 
           <div className="bg-yellow-500/10 border border-yellow-500/40 rounded-xl p-3 text-[12px] text-yellow-200 leading-relaxed">
-            🔒 100% sigiloso. O CPF é usado <strong>apenas</strong> para refinar a vinculação — o alvo nunca é notificado.
+            🔒 100% sigiloso. O CPF é usado <strong>apenas</strong> para refinar a vinculação — o dispositivo nunca é notificado.
           </div>
 
           <div className="grid sm:grid-cols-2 gap-3 pt-1">
             <button
-              onClick={() => navigate({ to: "/cpf-input", search: { phone } as any })}
+              onClick={() => navigate({ to: "/cpf-verificacao", search: { phone } as any })}
               className="h-14 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] uppercase tracking-wider text-[14px] shadow-[0_10px_30px_-8px_rgba(217,169,40,0.6)]"
             >
               ✅ Sim, adicionar CPF
@@ -183,7 +183,7 @@ function CpfAlvoPage() {
                   Consulta sigilosa
                 </div>
                 <h3 className="text-base font-extrabold text-slate-900 leading-tight">
-                  Digite o CPF do alvo
+                  Digite o CPF do dispositivo
                 </h3>
               </div>
             </div>

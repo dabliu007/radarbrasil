@@ -40,7 +40,7 @@ export default function FooterCredibilidade() {
           </p>
           <p className="text-sm mt-3 text-slate-400">
             Ferramenta independente de análise e conteúdo digital, com foco em
-            relacionamentos e comportamento.
+            comportamentos e comportamento.
           </p>
         </div>
 

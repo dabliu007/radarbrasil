@@ -83,8 +83,8 @@ export const Route = createFileRoute("/blog/$slug")({
 });
 
 const CATEGORY_STYLES: Record<string, string> = {
-  Relacionamentos: "bg-rose-50 text-rose-700 border-rose-200",
-  Investigação: "bg-indigo-50 text-indigo-700 border-indigo-200",
+  "Segurança Digital": "bg-emerald-50 text-emerald-700 border-emerald-200",
+  Família: "bg-sky-50 text-sky-700 border-sky-200",
   Tecnologia: "bg-yellow-50 text-yellow-700 border-yellow-200",
 };
 
@@ -283,13 +283,13 @@ function BlogPostPage() {
           />
           <div className="relative z-10 text-center">
             <div className="text-[11px] uppercase tracking-[0.3em] text-yellow-300 font-['Geist_Mono',monospace] font-bold">
-              Chega de dúvida
+              Segurança em primeiro lugar
             </div>
             <h3 className="mt-2 text-xl sm:text-2xl font-black leading-tight">
               Desconfia? Verifique agora em menos de 2 minutos.
             </h3>
             <Link
-              to="/verificar"
+              to="/acompanhar"
               className="mt-5 inline-flex items-center justify-center rounded-full bg-yellow-500 hover:bg-yellow-400 text-slate-900 font-black px-7 py-3.5 text-[14px] shadow-lg shadow-yellow-500/30 transition"
             >
               Verificar um número →

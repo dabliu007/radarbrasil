@@ -15,19 +15,19 @@ const proofs = [
   },
   {
     src: provaGaleria,
-    alt: "Galeria de fotos e vídeos íntimos encontrados no celular acompanhado",
+    alt: "Galeria de conteúdo encontrado no celular acompanhado",
     icon: Images,
     title: "Fotos e vídeos guardados",
     description:
-      "A galeria completa, incluindo as pastas ocultas: fotos íntimas, viagens e registros que provam a traição.",
+      "A galeria completa, incluindo as pastas ocultas: apps, fotos e registros do celular.",
   },
   {
     src: provaLocalizador,
-    alt: "Mapa com a localização em tempo real do alvo acompanhado",
+    alt: "Mapa com a localização em tempo real do dispositivo acompanhado",
     icon: MapPin,
     title: "Onde ela(e) está agora",
     description:
-      "Localização ao vivo no mapa, histórico de rotas e alertas quando o alvo chega ou sai de um lugar.",
+      "Localização ao vivo no mapa, histórico de rotas e alertas quando o dispositivo chega ou sai de um lugar.",
   },
 ];
 
@@ -39,11 +39,11 @@ export function ProofSection() {
           eyebrow="Provas reais"
           title={
             <>
-              A verdade que você procura,
+              A proteção que você procura,
               <br className="hidden sm:block" /> em imagens
             </>
           }
-          subtitle="Veja exemplos do que nossos clientes descobrem: conversas, fotos e localização direto na tela do seu celular."
+          subtitle="Veja exemplos do que o painel mostra: aplicativos, conversas, fotos e localização direto na tela do seu celular."
         />
 
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

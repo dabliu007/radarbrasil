@@ -64,17 +64,17 @@ export function KitSection() {
       <Container>
         <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
           <SectionHeading
-            eyebrow="Kit Detetive"
+            eyebrow="Kit Especialista"
             title={
               <>
                 Ferramentas para
-                <br className="hidden sm:block" /> flagrar e acompanhar
+                <br className="hidden sm:block" /> identificar e acompanhar
               </>
             }
-            subtitle="Além do app vinculador, o Kit Detetive traz câmeras escondidas e localizadores para você pegar a pessoa em flagrante."
+            subtitle="Além do app vinculador, o Kit Especialista traz câmeras escondidas e localizadores para você pegar a pessoa em identificante."
           />
           <div className="shrink-0">
-            <GoldButton to="/verificar">Testar grátis</GoldButton>
+            <GoldButton to="/acompanhar">Testar grátis</GoldButton>
           </div>
         </div>
 
@@ -88,7 +88,7 @@ export function KitSection() {
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(217,169,40,0.12),transparent_65%)]" />
                 <img
                   src={product.image || "/placeholder.svg"}
-                  alt={`${product.name} — Kit Detetive Zap Radar Brasil`}
+                  alt={`${product.name} — Kit Especialista Zap Radar Brasil`}
                   className="relative h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />

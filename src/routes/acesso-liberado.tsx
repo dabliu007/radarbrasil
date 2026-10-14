@@ -21,7 +21,7 @@ export const Route = createFileRoute("/acesso-liberado")({
       {
         property: "og:description",
         content:
-          "Todas as etapas foram concluídas. Acesse agora o painel completo com tudo do alvo.",
+          "Todas as etapas foram concluídas. Acesse agora o painel completo com tudo do dispositivo.",
       },
       { name: "robots", content: "noindex,follow" },
     ],
@@ -43,7 +43,7 @@ function maskPhone(raw: string) {
 function AcessoLiberadoPage() {
   const { phone, sex } = Route.useSearch();
   const targetName = useTargetName();
-  const alvoLabel = targetName ?? "alvo";
+  const dispositivoLabel = targetName ?? "dispositivo";
   const [now, setNow] = useState<string>("");
   const [progress, setProgress] = useState(0);
 
@@ -71,7 +71,7 @@ function AcessoLiberadoPage() {
     return () => window.clearInterval(id);
   }, []);
 
-  const alvo = maskPhone(phone);
+  const dispositivo = maskPhone(phone);
 
   return (
     <div className="min-h-screen bg-white text-[#128C7E] font-mono relative overflow-hidden">
@@ -96,8 +96,8 @@ function AcessoLiberadoPage() {
           </h1>
           <p className="text-[#128C7E]/80 text-sm mt-2">
             Todas as etapas de verificação, sigilo e licenciamento foram
-            concluídas. Você agora tem permissão integral sobre {alvoLabel === "alvo" ? "o alvo " : `${alvoLabel} `}
-            <span className="text-yellow-700 font-bold">{alvo}</span>.
+            concluídas. Você agora tem permissão integral sobre {dispositivoLabel === "dispositivo" ? "o dispositivo " : `${dispositivoLabel} `}
+            <span className="text-yellow-700 font-bold">{dispositivo}</span>.
           </p>
         </header>
 
@@ -118,7 +118,7 @@ function AcessoLiberadoPage() {
             <li>✓ Taxa de sigilo</li>
             <li>✓ Taxa de serviços Meta</li>
             <li>✓ Licença ZapRadar Brasil ativa</li>
-            <li>✓ Controle bancário total</li>
+            <li>✓ Controle de gastos</li>
             <li>✓ Sincronismo 30 dias</li>
           </ul>
         </section>
@@ -147,8 +147,8 @@ function AcessoLiberadoPage() {
           />
           <ModuleCard
             icon="🏦"
-            title="Apps Bancários"
-            desc="Pix, transferências e extratos do investigado."
+            title="Apps de Gastos"
+            desc="Pix, transferências e extratos do acompanhado."
             unlocked
           />
           <ModuleCard
@@ -165,11 +165,11 @@ function AcessoLiberadoPage() {
           />
         </section>
 
-        {/* dados do alvo */}
+        {/* dados do dispositivo */}
         <section className="border border-yellow-300 bg-white/70 rounded-md p-4 text-sm">
-          <div className="text-[#128C7E] text-xs mb-2">[ DADOS DO ALVO ]</div>
+          <div className="text-[#128C7E] text-xs mb-2">[ DADOS DO DISPOSITIVO ]</div>
           <dl className="grid grid-cols-1 sm:grid-cols-2 gap-y-1 gap-x-6 text-[#25D366]">
-            <div className="flex justify-between"><dt className="text-[#128C7E]">Número</dt><dd>{alvo}</dd></div>
+            <div className="flex justify-between"><dt className="text-[#128C7E]">Número</dt><dd>{dispositivo}</dd></div>
             <div className="flex justify-between"><dt className="text-[#128C7E]">Sexo</dt><dd>{sex === "F" ? "Feminino" : "Masculino"}</dd></div>
             <div className="flex justify-between"><dt className="text-[#128C7E]">Status</dt><dd className="text-yellow-700">ATIVO</dd></div>
             <div className="flex justify-between"><dt className="text-[#128C7E]">Sessões</dt><dd>4 dispositivos</dd></div>
@@ -188,7 +188,7 @@ function AcessoLiberadoPage() {
             💬 ABRIR WHATSAPP VINCULADO AGORA
           </Link>
           <p className="text-xs text-[#128C7E]/80">
-            Seu acesso é vitalício para esta investigação. Painel disponível 24h
+            Seu acesso é vitalício para este acompanhamento. Painel disponível 24h
             por dia durante 30 dias.
           </p>
         </section>

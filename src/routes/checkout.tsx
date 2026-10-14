@@ -48,25 +48,25 @@ const TESTIMONIALS = [
     name: "Mariana S.",
     location: "São Paulo, SP",
     time: "há 3 min",
-    text: "Eu tinha certeza que ele mentia. Dois minutos depois do pagamento eu já estava vendo TODAS as conversas apagadas. Doeu, mas hoje eu sei a verdade.",
+    text: "Eu suspeitava que algo estava errado. Dois minutos depois do pagamento eu já estava vendo todos os aplicativos e o tempo de uso. Hoje tenho paz de espírito.",
   },
   {
     name: "Rafael M.",
     location: "Rio de Janeiro, RJ",
     time: "há 11 min",
-    text: "Melhor R$ 137,00 que já gastei. Descobri o que estava acontecendo pelas minhas costas sem ela nunca desconfiar de nada. Vale cada centavo.",
+    text: "Melhor R$ 137,00 que já gastei. Acompanho o celular do meu filho e sei exatamente o que ele acessa. Vale cada centavo.",
   },
   {
     name: "Juliana P.",
     location: "Belo Horizonte, MG",
     time: "há 24 min",
-    text: "Fiquei com medo de ser golpe, mas liberou na hora certinho. Consegui ver fotos, áudios e até a localização em tempo real. Recomendo demais.",
+    text: "Fiquei com medo de ser golpe, mas liberou na hora certinho. Consegui ver aplicativos, tempo de uso e até a localização em tempo real. Recomendo demais.",
   },
   {
     name: "Carlos E.",
     location: "Curitiba, PR",
     time: "há 38 min",
-    text: "Passei meses na dúvida, perdendo o sono. Em uma tarde tive todas as respostas. A paz de saber a verdade não tem preço.",
+    text: "Passei meses preocupado, perdendo o sono. Em uma tarde tive todas as respostas. A paz de acompanhar meu filho não tem preço.",
   },
 ];
 
@@ -74,7 +74,7 @@ const BENEFITS = [
   "Acesso total ao celular vinculado por 365 dias",
   "Mensagens, fotos e áudios — inclusive os apagados",
   "Localização em tempo real e apps acompanhados",
-  "O alvo nunca é notificado do acompanhamento",
+  "O dispositivo nunca é notificado do acompanhamento",
 ];
 
 function CheckoutPage() {
@@ -82,7 +82,7 @@ function CheckoutPage() {
   const navigate = useNavigate();
   const createPix = useServerFn(createPixCharge);
   const targetName = useTargetName();
-  const doAlvo = targetName ? `de ${targetName}` : "do alvo";
+  const doDispositivo = targetName ? `de ${targetName}` : "do dispositivo";
 
   const [error, setError] = useState<string | null>(null);
   const [generating, setGenerating] = useState(false);
@@ -221,7 +221,7 @@ function CheckoutPage() {
         <div className="-mx-4 -mt-4 overflow-hidden">
           <img
             src="/images/checkout-hero.webp"
-            alt="Zap Radar Brasil — Falta pouco para você ter acesso à traição descoberta. Finalize a compra da sua licença."
+            alt="Zap Radar Brasil — Falta pouco para você ter acesso à risco descoberta. Finalize a compra da sua licença."
             className="w-full h-auto block"
             width={960}
             height={540}
@@ -263,7 +263,7 @@ function CheckoutPage() {
               Acesso liberado na hora
             </div>
             <h2 className="text-[17px] font-extrabold text-slate-900 leading-tight px-2">
-              Libere o acesso total ao celular {doAlvo}
+              Libere o acesso total ao celular {doDispositivo}
             </h2>
 
             <div className="pt-1">
@@ -322,10 +322,10 @@ function CheckoutPage() {
         {/* Apelo emocional */}
         <div className="bg-white border border-slate-200 rounded-3xl p-5 space-y-2 shadow-sm">
           <h3 className="text-[15px] font-extrabold text-slate-900 leading-snug">
-            Pare de perder o sono com a dúvida.
+            Proteja seu filho hoje.
           </h3>
           <p className="text-[13px] text-slate-600 leading-relaxed">
-            Cada dia sem saber a verdade é mais uma noite acordado imaginando o pior. Você merece{" "}
+            Cada dia sem acompanhar é mais uma noite preocupado imaginando o pior. Você merece{" "}
             <span className="font-bold text-slate-900">enxergar tudo com os próprios olhos</span> —
             mensagens apagadas, fotos escondidas e a localização em tempo real. Em minutos a angústia
             vira <span className="font-bold text-[#128C7E]">certeza</span>, e ninguém nunca vai saber
@@ -421,7 +421,7 @@ function CheckoutPage() {
           </div>
           <p className="text-[12px] text-slate-600 leading-relaxed">
             Você terá <span className="text-[#128C7E] font-semibold">acesso total ao celular vinculado</span>{" "}
-            {doAlvo} — mensagens, fotos, localização e aplicativos.
+            {doDispositivo} — mensagens, fotos, localização e aplicativos.
           </p>
           <p className="text-[11px] text-slate-400 leading-relaxed border-t border-slate-100 pt-2">
             O ZapRadar Brasil <span className="font-semibold">não se responsabiliza</span> pelo mau uso

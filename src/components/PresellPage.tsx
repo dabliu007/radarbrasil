@@ -27,7 +27,7 @@ export function PresellPage() {
     try {
       sessionStorage.setItem("zr.presell.sex", chosenSex);
     } catch {}
-    navigate({ to: "/verificar" });
+    navigate({ to: "/acompanhar" });
   };
 
   return (

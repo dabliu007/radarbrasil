@@ -25,7 +25,7 @@ export const Route = createFileRoute("/painel")({
       {
         name: "description",
         content:
-          "Painel do ZapRadar Brasil com localização em tempo real, fotos, mensagens apagadas, WhatsApp, Instagram e apps bancários do alvo investigado.",
+          "Painel do ZapRadar Brasil com localização em tempo real, fotos, mensagens apagadas, WhatsApp, Instagram e apps do dispositivo acompanhado.",
       },
       { property: "og:title", content: "Painel de Controle — ZapRadar Brasil" },
       { property: "og:url", content: "https://zapradar.top/painel" },
@@ -181,7 +181,7 @@ function PainelPage() {
     { key: "photos", label: "Fotos & Mídia", icon: I.photo, badge: 12 },
     { key: "whatsapp", label: "WhatsApp", icon: I.wpp, badge: 28 },
     { key: "instagram", label: "Instagram", icon: I.ig, badge: 9 },
-    { key: "banking", label: "Apps Bancários", icon: I.bank, badge: 7 },
+    { key: "banking", label: "Apps de Gastos", icon: I.bank, badge: 7 },
   ];
 
   const goUpsell = () => {
@@ -268,7 +268,7 @@ function PainelPage() {
           {/* target pill */}
           <div className="p-4 border-b border-slate-100">
             <div className="text-[10px] uppercase tracking-widest text-slate-400 font-semibold mb-2">
-              Alvo acompanhado
+              Dispositivo acompanhado
             </div>
             <div className="flex items-center gap-2.5">
               <div className="relative w-9 h-9 rounded-full bg-slate-200 overflow-hidden shrink-0">
@@ -288,7 +288,7 @@ function PainelPage() {
               </div>
               <div className="min-w-0 flex-1">
                 <div className="text-[13px] font-bold text-slate-800 truncate">
-                  {targetName ?? "Alvo #1"}
+                  {targetName ?? "Dispositivo #1"}
                 </div>
                 <div className="text-[10px] text-slate-500 font-mono truncate">
                   +55 {formattedPhone}
@@ -385,7 +385,7 @@ function PainelPage() {
                   {I.pin} Localização atual
                 </li>
                 {[
-                  { p: "Motel Le Charme · Alphaville", t: "22:47", hot: true },
+                  { p: "Shopping Center Norte", t: "22:47", hot: true },
                   { p: "Rest. Figueira Rubaiyat, SP", t: "20:12" },
                   { p: "Av. Paulista, 1230 · Trabalho", t: "12:20" },
                 ].map((l, i) => (
@@ -552,7 +552,7 @@ function PainelPage() {
                     { l: "WhatsApp", v: "42%", c: "#D9A928" },
                     { l: "Instagram", v: "22%", c: "#ec4899" },
                     { l: "Tinder / Match", v: "18%", c: "#f59e0b" },
-                    { l: "Apps bancários", v: "10%", c: "#0ea5e9" },
+                    { l: "Apps de gastos", v: "10%", c: "#0ea5e9" },
                     { l: "Outros", v: "8%", c: "#94a3b8" },
                   ].map((r) => (
                     <li key={r.l} className="flex items-center gap-2">
@@ -589,7 +589,7 @@ function PainelPage() {
                   { l: "Tinder", v: "5 matches", c: "#FF6B6B", k: "instagram" as ModuleKey, icon: <SocialIcon.tinder /> },
                   { l: "TikTok", v: "37 vídeos", c: "#000000", k: "instagram" as ModuleKey, icon: <SocialIcon.tiktok /> },
                   { l: "Facebook", v: "12 msgs", c: "#1877F2", k: "instagram" as ModuleKey, icon: <SocialIcon.facebook /> },
-                  { l: "Apps bancários", v: "R$ 1.270", c: "#8b5cf6", k: "banking" as ModuleKey, icon: <SocialIcon.bank /> },
+                  { l: "Apps de gastos", v: "R$ 1.270", c: "#8b5cf6", k: "banking" as ModuleKey, icon: <SocialIcon.bank /> },
                 ].map((it) => (
                   <li key={it.l}>
                     <button
@@ -662,7 +662,7 @@ function PainelPage() {
               💚
             </div>
             <DialogTitle className="text-[18px] font-extrabold">
-              Você merece saber a verdade
+              Você merece ter paz de esp
             </DialogTitle>
             <p className="text-[13px] text-yellow-50 mt-2 leading-snug">
               Noites sem dormir, o coração apertado, aquela sensação de que algo está errado… você não está louco(a). Sua intuição está te avisando por um motivo.
@@ -672,10 +672,10 @@ function PainelPage() {
           <div className="p-5 space-y-4">
             <div className="rounded-lg border border-rose-200 bg-rose-50 p-3 text-[12px] text-rose-800">
               <div className="font-bold mb-1 flex items-center gap-1.5">
-                <span>💔</span> Pare de sofrer na dúvida
+                <span>💛</span> Proteja quem você ama
               </div>
               <div className="text-rose-700 leading-snug">
-                Encontramos atividades suspeitas neste número. Continuar no escuro só machuca mais. Em minutos você tem a prova que precisa para tomar a decisão certa pela sua vida.
+                Encontramos pontos de atenção neste número. Continuar no escuro só aumenta a preocupação. Em minutos você tem o panorama completo para proteger quem você ama.
               </div>
             </div>
 
@@ -684,14 +684,14 @@ function PainelPage() {
               <div>
                 <div className="font-bold mb-0.5">Licença não detectada</div>
                 <div className="text-amber-700 leading-snug">
-                  Os dados do alvo já estão sincronizados em nosso servidor — só falta liberar o seu acesso para ver tudo agora.
+                  Os dados do dispositivo já estão sincronizados em nosso servidor — só falta liberar o seu acesso para ver tudo agora.
                 </div>
               </div>
             </div>
 
             <ul className="text-[12px] text-slate-700 space-y-2">
               {[
-                "Descubra com quem ele(a) fala escondido de você",
+                "Identifique com quem ele(a) fala escondido de você",
                 "Mensagens apagadas — o que tentaram esconder",
                 "Fotos e vídeos da galeria protegida",
                 "Instagram, Tinder, TikTok e Facebook em tempo real",
@@ -704,7 +704,7 @@ function PainelPage() {
             </ul>
 
             <div className="rounded-md bg-slate-50 border border-slate-200 p-3 text-[11px] text-slate-600 italic leading-snug text-center">
-              "Preferi pagar e descobrir a verdade do que passar mais uma noite chorando sem saber." — Ana C., São Paulo
+              "Preferi pagar e proteger seu filho do que passar mais uma noite chorando sem saber." — Ana C., São Paulo
             </div>
 
 
@@ -893,7 +893,7 @@ function ModulePreview({ mod, sex }: { mod: ModuleKey; sex: "M" | "F" }) {
 
 function LocationPreview() {
   const points = [
-    { t: "22:47", place: "Motel Le Charme · Alphaville", tag: "SUSPEITO", hot: true },
+    { t: "22:47", place: "Shopping Center Norte", tag: "ROTINA", hot: true },
     { t: "20:12", place: "Restaurante Figueira Rubaiyat" },
     { t: "18:03", place: "Academia SmartFit — Vila Nova", blur: true },
     { t: "12:20", place: "Trabalho · Av. Paulista, 1230", blur: true },
@@ -1235,11 +1235,11 @@ function CallsPreview({ sex: _sex }: { sex: "M" | "F" }) {
 
 function ContactsPreview() {
   const items = [
-    { name: "Amor ❤️", info: "salvo · 128 msgs · foto", hot: true },
-    { name: "Contato sem nome", info: "não salvo · 62 msgs", hot: true, blur: true },
-    { name: "Match (Tinder)", info: "salvo · 44 msgs · foto", hot: true, blur: true },
-    { name: "Personal", info: "salvo · 20 msgs" },
-    { name: "Mãe", info: "salvo · 12 msgs" },
+    { name: "Amor ❤️", info: "sdispositivo · 128 msgs · foto", hot: true },
+    { name: "Contato sem nome", info: "não sdispositivo · 62 msgs", hot: true, blur: true },
+    { name: "Match (Tinder)", info: "sdispositivo · 44 msgs · foto", hot: true, blur: true },
+    { name: "Personal", info: "sdispositivo · 20 msgs" },
+    { name: "Mãe", info: "sdispositivo · 12 msgs" },
   ];
   return (
     <div className="p-4 space-y-2">
@@ -1313,7 +1313,7 @@ function BlurredGallery({ sex }: { sex: "M" | "F" }) {
     sex === "F"
       ? [[220, 40], [340, 55], [10, 60], [280, 45], [30, 55], [200, 50], [350, 60], [260, 45]]
       : [[350, 55], [20, 60], [340, 50], [15, 55], [300, 45], [355, 60], [25, 55], [345, 50]];
-  const label = sex === "F" ? "Conteúdo íntimo detectado" : "Conteúdo adulto detectado";
+  const label = sex === "F" ? "Conteúdo impróprio detectado" : "Conteúdo impróprio detectado";
   return (
     <div>
       <div className="grid grid-cols-4 gap-1.5">

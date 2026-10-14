@@ -169,7 +169,7 @@ export const Route = createFileRoute("/api/public/umbrella-webhook")({
                   tx?.items?.[0]?.title ||
                   existingRaw?.product_name ||
                   metaFromBody?.product_name ||
-                  "Recupera Relacionamento: Acesso Anual",
+                  "Controle Parental: Acesso Anual",
                 createdAt: tx?.createdAt || existing?.created_at || new Date(),
                 customer: {
                   name: customer.name || payer.name || existingRaw?.customer_name,
@@ -261,7 +261,7 @@ export const Route = createFileRoute("/api/public/umbrella-webhook")({
                 status: "paid",
                 amount: finalAmount,
                 productId: utmifyOrderId,
-                productName: existingRaw?.product_name || "Recupera Relacionamento: Acesso Anual",
+                productName: existingRaw?.product_name || "Controle Parental: Acesso Anual",
                 createdAt: existingRaw?.utmify_created_at || existing?.created_at || new Date(),
                 approvedDate: new Date(),
                 customer: {

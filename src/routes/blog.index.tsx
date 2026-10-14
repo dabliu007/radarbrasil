@@ -5,17 +5,17 @@ import { BLOG_POSTS, formatDate } from "@/lib/blog-posts";
 export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
-      { title: "Blog ZapRadar Brasil · Relacionamentos, Traição e Investigação Digital" },
+      { title: "Blog ZapRadar Brasil · Segurança Digital e Controle Parental" },
       {
         name: "description",
         content:
-          "Artigos sobre sinais de traição, WhatsApp vinculado, mensagens apagadas e como investigar a fidelidade do seu parceiro(a) com discrição.",
+          "Guias e artigos práticos sobre segurança digital, controle parental e proteção dos seus filhos no celular.",
       },
       { property: "og:title", content: "Blog ZapRadar Brasil" },
       {
         property: "og:description",
         content:
-          "Guias e artigos práticos sobre relacionamentos, traição e investigação digital.",
+          "Guias e artigos práticos sobre segurança digital e controle parental.",
       },
       { property: "og:url", content: "https://zapradar.top/blog" },
       { property: "og:type", content: "website" },
@@ -26,8 +26,8 @@ export const Route = createFileRoute("/blog/")({
 });
 
 const CATEGORY_STYLES: Record<string, string> = {
-  Relacionamentos: "bg-rose-50 text-rose-700 border-rose-200",
-  Investigação: "bg-indigo-50 text-indigo-700 border-indigo-200",
+  "Segurança Digital": "bg-emerald-50 text-emerald-700 border-emerald-200",
+  Família: "bg-sky-50 text-sky-700 border-sky-200",
   Tecnologia: "bg-yellow-50 text-yellow-700 border-yellow-200",
 };
 
@@ -62,7 +62,7 @@ function BlogIndex() {
             </span>
           </Link>
           <Link
-            to="/verificar"
+            to="/acompanhar"
             className="hidden sm:inline-flex items-center gap-1 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-semibold px-4 py-2 text-[13px] transition"
           >
             Verificar número →
@@ -74,15 +74,15 @@ function BlogIndex() {
       <header className="border-b border-slate-200">
         <div className="max-w-6xl mx-auto px-5 pt-14 pb-10">
           <div className="text-[11px] uppercase tracking-[0.3em] text-yellow-700 font-['Geist_Mono',monospace] font-bold">
-            Diário da investigação digital
+            Diário da proteção digital
           </div>
           <h1 className="mt-3 text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 leading-[1.05] tracking-tight max-w-3xl">
-            A verdade sobre o que acontece{" "}
-            <span className="italic font-serif text-yellow-700">na tela dele.</span>
+            A segurança do seu filho começa{" "}
+            <span className="italic font-serif text-yellow-700">no celular.</span>
           </h1>
           <p className="mt-5 text-[15px] sm:text-base text-slate-600 leading-relaxed max-w-2xl">
-            Guias, análises e histórias reais sobre sinais de traição, WhatsApp
-            vinculado e como agir com discrição quando algo não parece certo.
+            Guias, análises e orientações reais sobre segurança digital, tempo de
+            tela e como proteger seus filhos online.
           </p>
 
           <div className="mt-6 flex flex-wrap items-center gap-2">
@@ -162,7 +162,7 @@ function BlogIndex() {
                   — Últimos artigos
                 </div>
                 <h3 className="mt-1 text-2xl font-black text-slate-900 tracking-tight">
-                  Todas as investigações
+                  Todos os artigos
                 </h3>
               </div>
               <div className="text-[12px] text-slate-500 font-['Geist_Mono',monospace] hidden sm:block">
@@ -228,20 +228,20 @@ function BlogIndex() {
           <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
             <div className="flex-1">
               <div className="text-[11px] uppercase tracking-[0.3em] text-yellow-300 font-['Geist_Mono',monospace] font-bold">
-                Chega de dúvida
+                Segurança em primeiro lugar
               </div>
               <h3 className="mt-2 text-2xl sm:text-3xl font-black leading-tight tracking-tight">
-                Descubra a verdade em menos de 2 minutos.
+                Comece a proteger seu filho em menos de 2 minutos.
               </h3>
               <p className="mt-2 text-[14px] text-slate-300">
-                Verifique um número e receba o relatório completo com discrição total.
+                Vincule o dispositivo e receba o painel completo de controle parental.
               </p>
             </div>
             <Link
-              to="/verificar"
+              to="/acompanhar"
               className="shrink-0 inline-flex items-center justify-center rounded-full bg-yellow-500 hover:bg-yellow-400 text-slate-900 font-black px-7 py-4 text-[14px] shadow-lg shadow-yellow-500/30 transition"
             >
-              Verificar agora →
+              Começar agora →
             </Link>
           </div>
         </section>

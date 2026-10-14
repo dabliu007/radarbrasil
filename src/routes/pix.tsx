@@ -40,7 +40,7 @@ function PixPage() {
   const [seconds, setSeconds] = useState(15 * 60); // 15 min de urgência
   const paidRef = useRef(false);
 
-  // Recupera o charge salvo no sessionStorage pelo checkout
+  // Recupera o charge sdispositivo no sessionStorage pelo checkout
   useEffect(() => {
     try {
       const raw = sessionStorage.getItem(STORAGE_PREFIX + id);
@@ -60,7 +60,7 @@ function PixPage() {
         if (cancelled) return;
         if (s.paid) {
           paidRef.current = true;
-          navigate({ to: "/sigilo", search: { phone, sex } });
+          navigate({ to: "/seguranca", search: { phone, sex } });
           return;
         }
       } catch {}
@@ -122,7 +122,7 @@ function PixPage() {
             { eventId: `purchase-${id}` }
           );
           try { sessionStorage.removeItem(STORAGE_PREFIX + id); } catch {}
-          navigate({ to: "/sigilo", search: { phone, sex } });
+          navigate({ to: "/seguranca", search: { phone, sex } });
           return true;
         }
         setStatusLabel("Aguardando pagamento…");

@@ -68,7 +68,7 @@ export function ProcessSection() {
           </div>
 
           <div className="mt-14 flex justify-center">
-            <GoldButton to="/verificar">Testar grátis agora</GoldButton>
+            <GoldButton to="/acompanhar">Testar grátis agora</GoldButton>
           </div>
         </Container>
       </section>
@@ -82,7 +82,7 @@ export function ProcessSection() {
             title={
               <>
                 Ninguém vai saber
-                <br className="hidden sm:block" /> que você descobriu
+                <br className="hidden sm:block" /> que você identificou
               </>
             }
             subtitle="O acompanhamento é 100% invisível: a pessoa nunca recebe notificação e nunca desconfia que o celular foi vinculado. Tudo fica só entre você e o seu painel."
@@ -136,7 +136,7 @@ export function ProcessSection() {
                   Dias de garantia
                 </h2>
                 <p className="mt-2 max-w-md text-[14px] leading-relaxed text-[#A7A7A7]">
-                  Se você não conseguir acessar o celular e descobrir o que procura, devolvemos
+                  Se você não conseguir acessar o celular e identificar o que procura, devolvemos
                   100% do seu dinheiro em até 30 dias.
                 </p>
               </div>

@@ -32,10 +32,10 @@ export function ExperienceSection() {
               title={
                 <>
                   Um time inteiro
-                  <br className="hidden sm:block" /> por trás da sua verdade
+                  <br className="hidden sm:block" /> por trás da sua proteção
                 </>
               }
-              subtitle="A Zap Radar Brasil é uma empresa especializada em tecnologia de acompanhamento e investigação discreta. Nossa equipe existe para acabar com a sua dúvida: já ajudamos milhares de pessoas a flagrar traições, acompanhar conversas e recuperar a paz — sempre com sigilo absoluto."
+              subtitle="A Zap Radar Brasil é uma empresa especializada em tecnologia de proteção e acompanhamento digital. Nossa equipe existe para dar tranquilidade à sua família: já ajudamos milhares de pais a proteger seus filhos, acompanhar o uso do celular e ter paz de espírito — sempre com responsabilidade."
             />
 
             <ul className="mt-8 flex flex-col gap-3">
@@ -49,8 +49,8 @@ export function ExperienceSection() {
               ))}
             </ul>
 
-            <GoldButton to="/verificar" className="mt-9">
-              Quero descobrir a verdade
+            <GoldButton to="/acompanhar" className="mt-9">
+              Quero proteger seu filho
             </GoldButton>
           </div>
         </Container>

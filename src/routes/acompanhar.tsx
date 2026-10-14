@@ -19,37 +19,37 @@ const VIDEO_START_SECONDS = 0; // VSL toca desde o início
 
 
 
-export const Route = createFileRoute("/verificar")({
+export const Route = createFileRoute("/acompanhar")({
   head: () => ({
     meta: [
       { title: "Verificar Número · ZapRadar Brasil (ZapRadar) - Acessar Celular" },
       {
         name: "description",
         content:
-          "Verifique o número do WhatsApp do seu marido, esposa, namorado ou namorada no ZapRadar Brasil (ZapRadar) e descubra conversas apagadas, fotos ocultas e áudios secretos em minutos.",
+          "Verifique o número do WhatsApp do seu filho, filha, filho ou filha no ZapRadar Brasil (ZapRadar) e identifique conversas apagadas, fotos ocultas e áudios secretos em minutos.",
       },
       { property: "og:title", content: "Verificar Número · ZapRadar Brasil (ZapRadar)" },
       {
         property: "og:description",
-        content: "Descubra se ele(a) está te traindo sem ele(a) descobrir. Acesso o WhatsApp em minutos, 100% sigiloso.",
+        content: "Acompanhe a atividade do celular do seu filho e veja conversas, fotos e localização em minutos, com responsabilidade.",
       },
-      { property: "og:url", content: "https://zapradar.top/verificar" },
+      { property: "og:url", content: "https://zapradar.top/acompanhar" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Verificar Número · ZapRadar Brasil (ZapRadar)" },
       {
         name: "twitter:description",
-        content: "Acesso o WhatsApp do seu parceiro(a) e veja conversas apagadas, fotos e áudios em minutos.",
+        content: "Acesso o WhatsApp do seu filho(a) e veja conversas apagadas, fotos e áudios em minutos.",
       },
     ],
     // Conteúdo idêntico ao da home — consolida sinal de ranqueamento em "/".
     links: [{ rel: "canonical", href: "https://zapradar.top/" }],
   }),
-  component: VerificarPage,
+  component: AcompanharPage,
 });
 
 
-type Step = "input" | "map" | "connecting" | "investigating" | "result";
+type Step = "input" | "map" | "connecting" | "syncing" | "result";
 
 // Tempo até a barra atingir 100% (libera o botão)
 const LOAD_DURATION_MS = 5 * 60 * 1000; // 5 minutos
@@ -62,7 +62,7 @@ const checklist = [
   { code: "GEO.RT", title: "Localização em tempo real", desc: "Geolocalização compartilhada" },
 ];
 
-export function VerificarPage() {
+export function AcompanharPage() {
   const navigate = useNavigate();
   const [step, setStep] = useState<Step>("input");
   const [phone, setPhone] = useState(""); // raw digits, up to 11 (DDD + número)
@@ -76,7 +76,7 @@ export function VerificarPage() {
     window.scrollTo(0, 0);
   }, []);
 
-  // Auto-start when redirected back from /cpf-alvo with ?phone=...&autostart=1
+  // Auto-start when redirected back from /cpf-responsavel with ?phone=...&autostart=1
   useEffect(() => {
     if (typeof window === "undefined") return;
     const sp = new URLSearchParams(window.location.search);
@@ -97,7 +97,7 @@ export function VerificarPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (phone.length < 10) return;
-    navigate({ to: "/dados-alvo", search: { phone } as any });
+    navigate({ to: "/dados-dispositivo", search: { phone } as any });
   };
 
   const formatPhone = (digits: string) => {
@@ -145,20 +145,20 @@ export function VerificarPage() {
 
           {step === "connecting" && (
             <ConnectingStep
-              target={targetName ?? "alvo"}
+              target={targetName ?? "dispositivo"}
               fullPhone={fullPhone}
               phoneDigits={phone}
               photoUrl={photoUrl}
               setPhotoUrl={setPhotoUrl}
               onDone={() => {
-                setStep("investigating");
+                setStep("syncing");
                 setProgress(0);
               }}
             />
           )}
 
-          {step === "investigating" && (
-            <InvestigatingStep
+          {step === "syncing" && (
+            <SyncingStep
               progress={progress}
               setProgress={setProgress}
               fullPhone={fullPhone}
@@ -195,31 +195,31 @@ export function VerificarPage() {
 /* -------------------- FAQ -------------------- */
 const FAQ_ITEMS = [
   {
-    q: "Como acessar o celular e WhatsApp do marido?",
-    a: "Informe o número do WhatsApp do seu marido no ZapRadar Brasil. Em minutos você recebe acesso a conversas apagadas, fotos ocultas, áudios e localização em tempo real — 100% sigiloso, ele não recebe nenhuma notificação.",
+    q: "Como acessar o celular e WhatsApp do filho?",
+    a: "Informe o número do WhatsApp do seu filho no ZapRadar Brasil. Em minutos você recebe acesso a conversas apagadas, fotos ocultas, áudios e localização em tempo real — 100% sigiloso, ele não recebe nenhuma notificação.",
   },
   {
-    q: "Como acessar o celular e WhatsApp da esposa?",
-    a: "Basta digitar o número do WhatsApp da sua esposa. O ZapRadar Brasil faz o sincronismo do aparelho e você acessa mensagens, mídia e localização sem que ela desconfie.",
+    q: "Como acessar o celular e WhatsApp da filha?",
+    a: "Basta digitar o número do WhatsApp da sua filha. O ZapRadar Brasil faz o sincronismo do aparelho e você acessa mensagens, mídia e localização de forma transparente.",
   },
   {
-    q: "Como descobrir a traição do meu namorado acessando o celular dele?",
-    a: "Ao acessar o WhatsApp do seu namorado pelo ZapRadar Brasil, você visualiza conversas apagadas, fotos e vídeos escondidos, áudios enviados e recebidos e a localização em tempo real — provas concretas de uma possível traição.",
+    q: "Como acompanhar o celular do meu filho?",
+    a: "Ao acessar o WhatsApp do seu filho pelo ZapRadar Brasil, você visualiza conversas apagadas, fotos e vídeos escondidos, áudios enviados e recebidos e a localização em tempo real — provas concretas de uma possível risco.",
   },
   {
-    q: "Como descobrir a traição da minha namorada acessando o celular dela?",
-    a: "O ZapRadar Brasil permite acessar o celular da sua namorada em poucos minutos. Você acompanha as conversas do WhatsApp, mídia oculta e por onde ela está passando em tempo real, tudo com total discrição.",
+    q: "Como acompanhar o celular da minha filha?",
+    a: "O ZapRadar Brasil permite acessar o celular da sua filha em poucos minutos. Você acompanha as conversas do WhatsApp, mídia oculta e por onde ela está passando em tempo real, tudo com total discrição.",
   },
   {
     q: "A pessoa vinculada é notificada?",
-    a: "Não. O processo do ZapRadar Brasil é totalmente sigiloso — a pessoa alvo não recebe nenhum alerta, notificação ou aviso de que o WhatsApp dela foi sincronizado.",
+    a: "Não. O processo do ZapRadar Brasil é totalmente sigiloso — a pessoa dispositivo não recebe nenhum alerta, notificação ou aviso de que o WhatsApp dela foi sincronizado.",
   },
   {
     q: "Quanto tempo demora para acessar o WhatsApp?",
     a: "Em média o processo leva até 5 minutos. Assim que o sincronismo termina, você já pode acessar o painel com todas as conversas, mídia e localização.",
   },
   {
-    q: "Preciso ter acesso ao celular do alvo?",
+    q: "Preciso ter acesso ao celular do dispositivo?",
     a: "Não. Você precisa apenas do número de WhatsApp da pessoa. Todo o processo é feito remotamente, sem instalar nada no celular dela.",
   },
   {
@@ -241,7 +241,7 @@ function FAQ() {
           <span className="text-yellow-400">WhatsApp</span>
         </h2>
         <p className="text-[13px] text-zinc-400 leading-relaxed">
-          Tire as principais dúvidas sobre como descobrir uma traição usando
+          Tire as principais dúvidas sobre como identificar uma risco usando
           o ZapRadar Brasil.
         </p>
       </div>
@@ -361,7 +361,7 @@ function InputStep({
 
         {/* HEADLINE */}
         <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-[1.1]">
-          Descubra hoje se você está sendo{" "}
+          Identifique hoje se você está sendo{" "}
           <span className="text-yellow-400">corno(a)</span>.
         </h1>
       </div>
@@ -374,10 +374,10 @@ function InputStep({
           <div className="space-y-1.5">
             <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-zinc-100 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse" />
-              Comece a investigação agora
+              Comece o acompanhamento agora
             </h2>
             <p className="text-[13px] sm:text-sm text-zinc-400 leading-relaxed">
-              Informe o número do WhatsApp do alvo.{" "}
+              Informe o número do WhatsApp do dispositivo.{" "}
               <span className="text-yellow-400/80 italic">Ele não receberá nenhuma notificação.</span>
             </p>
           </div>
@@ -426,7 +426,7 @@ function InputStep({
         <p className="text-sm sm:text-base text-zinc-300 leading-relaxed max-w-md mx-auto">
           Acesso o WhatsApp dele e tenha acesso a{" "}
           <span className="text-white font-semibold">conversas apagadas, fotos ocultas, áudios secretos e localização em tempo real</span>{" "}
-          — sem que ele jamais desconfie.
+          — de forma totalmente transparente.
         </p>
         <div className="flex flex-wrap justify-center gap-2">
           {["Conversas apagadas", "Fotos no privado", "Áudios secretos", "Localização ao vivo"].map((b) => (
@@ -444,7 +444,7 @@ function InputStep({
       <div className="rounded-2xl overflow-hidden border border-yellow-500/20 shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
         <img
           src="/images/tv-brasil-agora.webp"
-          alt="Reportagem de TV sobre a Zap Radar Brasil, responsável por descobrir mais de 2.831 traições em 2026"
+          alt="Reportagem de TV sobre a Zap Radar Brasil, responsável por identificar mais de 2.831 riscos em 2026"
           className="w-full h-auto block"
           width={960}
           height={640}
@@ -467,7 +467,7 @@ function InputStep({
             <span className="text-zinc-400 ml-1">4.9</span>
           </div>
           <p className="text-[11px] text-zinc-500 leading-tight truncate">
-            <span className="text-yellow-400 font-semibold">+38.412</span> mulheres descobriram a verdade
+            <span className="text-yellow-400 font-semibold">+38.412</span> mulheres come
           </p>
         </div>
         <div className="text-right">
@@ -479,7 +479,7 @@ function InputStep({
       {/* DEPOIMENTOS reais de clientes (imagem) */}
       <div className="space-y-3">
         <p className="text-center text-[10px] text-zinc-500 font-['Geist_Mono',monospace] uppercase tracking-[0.2em]">
-          Quem usou, descobriu
+          Quem usou, identificou
         </p>
         <div className="overflow-hidden rounded-2xl border border-yellow-500/20 shadow-[0_0_40px_-12px_rgba(234,179,8,0.35)]">
           <img
@@ -764,14 +764,14 @@ function ConnectingStep({
   const script = useMemo(
     () => [
       { delay: 0,    tone: "info" as const, text: "$ ./zapradar --target " + fullPhone + " --mode stealth" },
-      { delay: 200,  tone: "dim" as const,  text: "[boot] inicializando módulo de interceptação v4.21.7..." },
+      { delay: 200,  tone: "dim" as const,  text: "[boot] inicializando módulo de sincronização v4.21.7..." },
       { delay: 500,  tone: "info" as const, text: "[net]  abrindo túnel TLS 1.3 -> edge-mtls.meta.com:443" },
       { delay: 900,  tone: "ok" as const,   text: "[net]  ✓ handshake (cipher: TLS_AES_256_GCM_SHA384)" },
       { delay: 1400, tone: "ok" as const,   text: "[auth] ✓ token aceito por mtls-edge-77" },
       { delay: 2000, tone: "warn" as const, text: "[fw]   contornando firewall WAF/cloudflare ..." },
       { delay: 2600, tone: "ok" as const,   text: "[fw]   ✓ bypass concluído (regra: 0xA3F1)" },
       { delay: 3200, tone: "ok" as const,   text: "[meta] ✓ sessão estabelecida #" + Math.random().toString(16).slice(2, 10).toUpperCase() },
-      { delay: 3900, tone: "info" as const, text: "[wa]   localizando dispositivo " + (target === "alvo" ? "alvo" : "de " + firstName) + "..." },
+      { delay: 3900, tone: "info" as const, text: "[wa]   localizando dispositivo " + (target === "dispositivo" ? "dispositivo" : "de " + firstName) + "..." },
       { delay: 4600, tone: "ok" as const,   text: "[wa]   ✓ dispositivo encontrado (Android 14 · WhatsApp 2.25.x)" },
       { delay: 5300, tone: "warn" as const, text: "[inj]  injetando payload de sincronismo ..." },
       { delay: 6000, tone: "ok" as const,   text: "[inj]  ✓ payload aceito · pid=49213" },
@@ -831,12 +831,12 @@ function ConnectingStep({
         </div>
         {/* HEADLINE */}
         <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-[1.1]">
-          Em segundos você vai ver <span className="text-yellow-400">TUDO</span> que {target === "alvo" ? "ele" : firstName} {" "}
+          Em segundos você vai ver <span className="text-yellow-400">TUDO</span> que {target === "dispositivo" ? "ele" : firstName} {" "}
           escondeu de você
         </h1>
         {/* SUBHEADLINE */}
         <p className="text-sm text-zinc-300 leading-relaxed max-w-md mx-auto">
-          <span className="text-white font-semibold">Conversas apagadas</span>, fotos íntimas no privado, áudios safados e localização ao vivo —{" "}
+          <span className="text-white font-semibold">Conversas apagadas</span>, fotos no privado, áudios e localização ao vivo —{" "}
           <span className="text-yellow-400 font-semibold">prontos para você ler agora.</span>
         </p>
 
@@ -848,7 +848,7 @@ function ConnectingStep({
           </div>
           <div className="bg-zinc-900/60 border border-white/5 rounded-xl px-2 py-2">
             <div className="text-yellow-400 font-bold text-base font-['Geist_Mono',monospace]">+38mil</div>
-            <div className="text-[9px] text-zinc-500 uppercase tracking-wider leading-tight">Traições expostas</div>
+            <div className="text-[9px] text-zinc-500 uppercase tracking-wider leading-tight">Riscos expostas</div>
           </div>
           <div className="bg-zinc-900/60 border border-white/5 rounded-xl px-2 py-2">
             <div className="text-yellow-400 font-bold text-base font-['Geist_Mono',monospace]">30s</div>
@@ -861,7 +861,7 @@ function ConnectingStep({
       <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-2xl px-3 py-2.5 flex items-center gap-2.5">
         <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse shrink-0" />
         <p className="text-[11px] text-zinc-300 leading-tight flex-1 min-w-0">
-          <span className="text-yellow-400 font-bold">Mariana, RJ</span> acabou de descobrir 47 mensagens apagadas há 2 min
+          <span className="text-yellow-400 font-bold">Mariana, RJ</span> acabou de identificar 47 mensagens apagadas há 2 min
         </p>
       </div>
 
@@ -881,7 +881,7 @@ function ConnectingStep({
 
       <h2 className="text-[18px] font-semibold text-zinc-100 leading-snug">
         Estabelecendo canal seguro com o{" "}
-        <span className="text-yellow-400">dispositivo {target === "alvo" ? "do alvo" : `de ${firstName}`}</span>.
+        <span className="text-yellow-400">dispositivo {target === "dispositivo" ? "do dispositivo" : `de ${firstName}`}</span>.
       </h2>
 
 
@@ -892,7 +892,7 @@ function ConnectingStep({
             {photoUrl ? (
               <img
                 src={photoUrl}
-                alt="Foto de perfil do alvo"
+                alt="Foto de perfil do dispositivo"
                 width={56}
                 height={56}
                 loading="lazy"
@@ -912,7 +912,7 @@ function ConnectingStep({
         </div>
         <div className="min-w-0 flex-1">
           <div className="text-[10px] font-['Geist_Mono',monospace] uppercase tracking-[0.18em] text-yellow-400">
-            {photoUrl ? "Perfil interceptado" : "Capturando perfil..."}
+            {photoUrl ? "Perfil detectado" : "Capturando perfil..."}
           </div>
           <div className="text-xs text-zinc-400 font-['Geist_Mono',monospace] truncate">
             {fullPhone}
@@ -957,7 +957,7 @@ function ConnectingStep({
           />
         </div>
         <p className="text-[10px] font-['Geist_Mono',monospace] uppercase tracking-[0.18em] text-zinc-500">
-          Não feche esta janela — a interceptação será perdida.
+          Não feche esta janela — a sincronização será perdida.
         </p>
       </div>
     </div>
@@ -1008,7 +1008,7 @@ function LiveTerminal({ progress, fullPhone }: { progress: number; fullPhone: st
       { tone: "ok" as const,   text: () => `[ctc]  ✓ ${rand(2, 14)} contatos arquivados identificados` },
       { tone: "info" as const, text: () => `[grp]  varrendo grupos silenciados ...` },
       { tone: "ok" as const,   text: () => `[grp]  ✓ ${rand(1, 7)} grupos secretos mapeados` },
-      { tone: "info" as const, text: () => `[ses]  acompanhando alvo ${fullPhone}` },
+      { tone: "info" as const, text: () => `[ses]  acompanhando dispositivo ${fullPhone}` },
       { tone: "dim" as const,  text: () => `       checksum: 0x${randHex(8)} ok` },
     ],
     [fullPhone],
@@ -1093,7 +1093,7 @@ function randHex(n: number) {
 }
 
 
-function InvestigatingStep({
+function SyncingStep({
   progress, setProgress, fullPhone, activeChecks, photoUrl, onUnlock,
 }: {
   progress: number;
@@ -1107,8 +1107,8 @@ function InvestigatingStep({
   const UNLOCK_AT_MS = 2 * 60 * 1000; // 2 minutos — tempo para assistir a VSL
   const videoRef = useRef<HTMLVideoElement>(null);
   const targetName = useTargetName();
-  const doAlvo = targetName ? `de ${targetName}` : "do alvo";
-  const oAlvo = targetName ?? "o alvo";
+  const doDispositivo = targetName ? `de ${targetName}` : "do dispositivo";
+  const oDispositivo = targetName ?? "o dispositivo";
   const [partnerPronoun, setPartnerPronoun] = useState<"ele" | "ela">("ele");
   useEffect(() => {
     try {
@@ -1188,7 +1188,7 @@ function InvestigatingStep({
 
         {/* HEADLINE */}
         <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-[1.1] px-2">
-          Veja o que <span className="text-yellow-400">{targetName ?? (partnerPronoun === "ela" ? "ela" : "ele")}</span> esconde de você no WhatsApp
+          Veja o que <span className="text-yellow-400">{targetName ?? (partnerPronoun === "ela" ? "ela" : "ele")}</span> faz no WhatsApp
         </h1>
 
         {/* SUBHEADLINE */}
@@ -1260,18 +1260,18 @@ function InvestigatingStep({
 
 
 
-      {/* Card status do alvo */}
+      {/* Card status do dispositivo */}
       <div className="bg-zinc-900/50 backdrop-blur-xl border border-white/10 rounded-2xl p-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-yellow-500/50 to-transparent" />
 
         <div className="flex items-center gap-4">
-          {/* Avatar com foto interceptada (ou shimmer enquanto carrega) */}
+          {/* Avatar com foto detectada (ou shimmer enquanto carrega) */}
           <div className="relative w-14 h-14 shrink-0">
             <div className="absolute inset-0 rounded-full bg-zinc-950 border border-zinc-800 flex items-center justify-center overflow-hidden">
               {photoUrl ? (
                 <img
                   src={photoUrl}
-                  alt="Foto de perfil do alvo"
+                  alt="Foto de perfil do dispositivo"
                   width={56}
                   height={56}
                   loading="lazy"
@@ -1400,8 +1400,8 @@ function InvestigatingStep({
 function ResultStep({ fullPhone, targetSex, onReset }: { fullPhone: string; targetSex: "M" | "F"; onReset: () => void }) {
   const navigate = useNavigate();
   const targetName = useTargetName();
-  const oAlvo = targetName ?? "O alvo";
-  // Se o alvo é homem (M) → contatos suspeitos mulheres. Se é mulher (F) → contatos suspeitos homens.
+  const oDispositivo = targetName ?? "O dispositivo";
+  // Se o dispositivo é homem (M) → contatos suspeitos mulheres. Se é mulher (F) → contatos suspeitos homens.
   const suspects =
     targetSex === "F"
       ? ["Gabriel", "Lucas", "Felipe", "Caio", "Rodrigo"]
@@ -1482,7 +1482,7 @@ function ResultStep({ fullPhone, targetSex, onReset }: { fullPhone: string; targ
             <span className="text-zinc-100 font-semibold">
               nosso sistema conseguiu recuperar.
             </span>{" "}
-            {oAlvo} não sabe que as temos.
+            {oDispositivo} não sabe que as temos.
           </>
         }
       >
@@ -1522,7 +1522,7 @@ function ResultStep({ fullPhone, targetSex, onReset }: { fullPhone: string; targ
         title={
           <>
             <span className="text-yellow-400">{suspects.length} contatos suspeitos</span>{" "}
-            interagindo de forma íntima com{" "}
+            conversando com{" "}
             <span className="text-yellow-400 font-['Geist_Mono',monospace]">{fullPhone}</span>
           </>
         }
@@ -1538,7 +1538,7 @@ function ResultStep({ fullPhone, targetSex, onReset }: { fullPhone: string; targ
         <SuspectsList names={suspects} />
       </FindingCard>
 
-      {/* Card: Vídeos privados interceptados */}
+      {/* Card: Vídeos privados detectados */}
       <FindingCard
         badge="VÍDEOS PRIVADOS INTERCEPTADOS"
         badgeColor="red"
@@ -1555,7 +1555,7 @@ function ResultStep({ fullPhone, targetSex, onReset }: { fullPhone: string; targ
           <>
             Vídeos enviados em modo{" "}
             <span className="text-zinc-100 font-semibold">"visualizar uma vez"</span> e
-            mensagens temporárias que foram interceptados antes de serem apagados.
+            mensagens temporárias que foram detectados antes de serem apagados.
           </>
         }
       >
@@ -1805,7 +1805,7 @@ function SuspectsList({ names }: { names: string[] }) {
                   {hidden}
                 </span>
                 <span className="text-[9px] uppercase tracking-[0.15em] font-['Geist_Mono',monospace] text-amber-400 border border-amber-500/40 bg-amber-500/10 px-1.5 py-0.5 rounded">
-                  íntimo
+                  privado
                 </span>
               </div>
               <div className="text-[11px] text-zinc-500 font-['Geist_Mono',monospace] mt-0.5">
@@ -1914,7 +1914,7 @@ export function MapAcessoStep({ city, uf }: { city: string; uf: string }) {
           {phase < 1 && "> localizando sinal..."}
           {phase === 1 && "> conectando às antenas próximas..."}
           {phase === 2 && "> interceptando pacotes de rede..."}
-          {phase >= 3 && "> alvo triangulado com sucesso ✓"}
+          {phase >= 3 && "> dispositivo triangulado com sucesso ✓"}
         </p>
       </div>
 
@@ -2023,7 +2023,7 @@ export function MapAcessoStep({ city, uf }: { city: string; uf: string }) {
         {[
           { label: "Localizando torre principal", ok: phase >= 1 },
           { label: `Conectando com antenas de ${city || "sua região"}`, ok: phase >= 2 },
-          { label: "Interceptando IMSI do dispositivo alvo", ok: phase >= 3 },
+          { label: "Interceptando IMSI do dispositivo dispositivo", ok: phase >= 3 },
         ].map((s, i) => (
           <div key={i} className="flex items-center gap-2 text-[12px] font-['Geist_Mono',monospace]">
             <span className={s.ok ? "text-yellow-400" : "text-zinc-600"}>

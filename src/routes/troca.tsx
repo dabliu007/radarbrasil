@@ -55,7 +55,7 @@ function TrocaPage() {
         também a nossa <strong>Garantia de Satisfação</strong>.
       </p>
 
-      <H2>3. Produtos físicos (Kit Detetive)</H2>
+      <H2>3. Produtos físicos (Kit Especialista)</H2>
       <ul>
         <li>
           <strong>Troca por defeito:</strong> em caso de produto com defeito ou

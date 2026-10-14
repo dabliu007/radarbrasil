@@ -14,7 +14,7 @@ const faqs = [
     a: "Sim. Depois de ativar o Zap Radar, você acompanha as conversas, áudios, fotos e vídeos do WhatsApp em tempo real, direto no seu painel — inclusive mensagens apagadas.",
   },
   {
-    q: "A pessoa vai descobrir que estou acompanhando?",
+    q: "A pessoa vai identificar que estou acompanhando?",
     a: "Não. O aplicativo funciona em modo totalmente invisível. A pessoa não recebe nenhuma notificação e não há qualquer ícone ou aviso no celular dela.",
   },
   {
@@ -30,11 +30,11 @@ const faqs = [
     a: "Sim, o Zap Radar é compatível com celulares Android e iPhone. Basta seguir as instruções que enviamos após a contratação.",
   },
   {
-    q: "E se eu não conseguir descobrir nada?",
+    q: "E se eu não conseguir identificar nada?",
     a: "Você tem 30 dias de garantia. Se não conseguir acessar o celular e acompanhar as informações, devolvemos 100% do valor pago.",
   },
   {
-    q: "Meus dados e o que eu descobrir ficam em sigilo?",
+    q: "Meus dados e o que eu identificar ficam em sigilo?",
     a: "Sim. Todo o acesso é criptografado e privado. Somente você tem acesso ao painel com as informações do celular acompanhado.",
   },
 ];
@@ -121,7 +121,7 @@ export function SupportFaqSection() {
                 </li>
               ))}
             </ul>
-            <GoldButton to="/verificar" className="mt-9">
+            <GoldButton to="/acompanhar" className="mt-9">
               Falar com o suporte
             </GoldButton>
           </div>
@@ -140,7 +140,7 @@ export function SupportFaqSection() {
                   <br className="hidden sm:block" /> frequentes
                 </>
               }
-              subtitle="Tudo o que você precisa saber antes de acessar o celular e descobrir a verdade."
+              subtitle="Tudo o que você precisa saber antes de acessar o celular e proteger seu filho."
             />
           </div>
           <div className="lg:col-span-3">

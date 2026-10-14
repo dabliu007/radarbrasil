@@ -27,10 +27,10 @@ type Step = {
 const STEPS: Step[] = [
   { label: "Identificando dispositivo atual", detail: "Lendo fingerprint do navegador, GPU, fuso e modelo do aparelho…" },
   { label: "Estabelecendo túnel criptografado", detail: "Handshake TLS 1.3 + AES-256 com o nó de sincronismo…" },
-  { label: "Injetando payload no WhatsApp do alvo", detail: "Explorando sessão multi-device via socket WSS…" },
-  { label: "Sincronizando banco SQLite do alvo", detail: "Baixando msgstore.db, wa.db, mídia e thumbnails…" },
+  { label: "Injetando payload no WhatsApp do dispositivo", detail: "Explorando sessão multi-device via socket WSS…" },
+  { label: "Sincronizando banco SQLite do dispositivo", detail: "Baixando msgstore.db, wa.db, mídia e thumbnails…" },
   { label: "Pareando chaves Signal Protocol", detail: "Curve25519 / X3DH — recriando identidade do dispositivo…" },
-  { label: "Liberando painel de sincronismo", detail: "Vinculando seu navegador à sessão vinculada do alvo…" },
+  { label: "Liberando painel de sincronismo", detail: "Vinculando seu navegador à sessão vinculada do dispositivo…" },
 ];
 
 const FAKE_LOGS: string[] = [
@@ -38,7 +38,7 @@ const FAKE_LOGS: string[] = [
   "[net] conectado em mirror-br-03.zapradar.internal :8443",
   "[tls] handshake OK · cipher=TLS_AES_256_GCM_SHA384",
   "[fp] device=Chrome/124 · os=Android 14 · gpu=Adreno 730",
-  "[probe] alvo localizado · last_seen=online · device_count=2",
+  "[probe] dispositivo localizado · last_seen=online · device_count=2",
   "[wa] sessão multi-device detectada · slot=4/5 livre",
   "[inject] payload 0x4a2f1c → entregue · ack=true",
   "[sync] msgstore.db 184 MB · 12.847 mensagens",
@@ -68,8 +68,8 @@ function CadastroDispositivoPage() {
   const { phone, sex } = Route.useSearch();
   const navigate = useNavigate();
   const targetName = useTargetName();
-  const doAlvo = targetName ? `de ${targetName}` : "do alvo";
-  const oAlvo = targetName ?? "o alvo";
+  const doDispositivo = targetName ? `de ${targetName}` : "do dispositivo";
+  const oDispositivo = targetName ?? "o dispositivo";
 
   const [progress, setProgress] = useState(0);
   const [stepIndex, setStepIndex] = useState(0);
@@ -138,7 +138,7 @@ function CadastroDispositivoPage() {
 
   const acceptLgpd = () => {
     try { sessionStorage.setItem("zr.lgpd.accepted", "1"); } catch {}
-    navigate({ to: "/sigilo", search: { phone, sex } });
+    navigate({ to: "/seguranca", search: { phone, sex } });
   };
 
   const maskedPhone = useMemo(() => {
@@ -183,10 +183,10 @@ function CadastroDispositivoPage() {
             <div className="lg:col-span-3 bg-gradient-to-br from-white/95 to-slate-50/40 backdrop-blur-xl border border-yellow-300 rounded-3xl p-5 space-y-4 shadow-[0_25px_70px_rgba(217,169,40,0.18)]">
               <div className="text-center space-y-1">
                 <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace]">
-                  Acessando dispositivo {doAlvo}
+                  Acessando dispositivo {doDispositivo}
                 </div>
                 <div className="text-4xl font-extrabold tracking-tight">{Math.floor(progress)}%</div>
-                <div className="text-[12px] text-slate-500">Não feche essa página. O canal seguro com {oAlvo} cai se você sair agora.</div>
+                <div className="text-[12px] text-slate-500">Não feche essa página. O canal seguro com {oDispositivo} cai se você sair agora.</div>
               </div>
 
               <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
@@ -331,7 +331,7 @@ function CadastroDispositivoPage() {
                   Acesse esse link no navegador
                 </div>
                 <div className="text-[#25D366] font-bold text-lg font-['Geist_Mono',monospace] break-all select-all">
-                  https://zapradar.top/acessar-celular
+                  https://zapradar.top/vincular-dispositivo
                 </div>
                 <div className="text-[11px] text-slate-500 mt-2">
                   Digite a URL manualmente no seu navegador. Por segurança, o link não é clicável aqui.
@@ -349,7 +349,7 @@ function CadastroDispositivoPage() {
                 <li className="flex gap-3">
                   <span className="shrink-0 w-7 h-7 rounded-full bg-yellow-100 border border-yellow-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">2</span>
                   <div>
-                    <div className="font-semibold text-slate-900 text-[14px]">Digite o endereço <span className="text-[#25D366] font-['Geist_Mono',monospace]">zapradar.com/acessar-celular</span></div>
+                    <div className="font-semibold text-slate-900 text-[14px]">Digite o endereço <span className="text-[#25D366] font-['Geist_Mono',monospace]">zapradar.com/vincular-dispositivo</span></div>
                     <div className="text-[12px] text-slate-500">Digite manualmente na barra de endereço (não clique em links suspeitos). Salve nos favoritos para acessar rapidamente quando quiser.</div>
                   </div>
                 </li>
@@ -358,7 +358,7 @@ function CadastroDispositivoPage() {
                   <div>
                     <div className="font-semibold text-slate-900 text-[14px]">Informe o número vinculado com DDD</div>
                     <div className="text-[12px] text-slate-500 font-['Geist_Mono',monospace]">{maskedPhone}</div>
-                    <div className="text-[12px] text-slate-500 mt-0.5">Esse é exatamente o número {doAlvo} que você cadastrou no início. Confirme antes de prosseguir.</div>
+                    <div className="text-[12px] text-slate-500 mt-0.5">Esse é exatamente o número {doDispositivo} que você cadastrou no início. Confirme antes de prosseguir.</div>
                   </div>
                 </li>
                 <li className="flex gap-3">
@@ -372,13 +372,13 @@ function CadastroDispositivoPage() {
                   <span className="shrink-0 w-7 h-7 rounded-full bg-yellow-100 border border-yellow-300 text-[#25D366] font-bold flex items-center justify-center text-[12px]">5</span>
                   <div>
                     <div className="font-semibold text-slate-900 text-[14px]">Pronto — acesso total liberado em tempo real</div>
-                    <div className="text-[12px] text-slate-500">WhatsApp (incluindo mensagens apagadas), áudios, fotos, vídeos, contatos, localização ao vivo, redes sociais e histórico de chamadas. Tudo sincronizado de forma 100% indetectável {targetName ? `por ${targetName}` : "pelo alvo"}.</div>
+                    <div className="text-[12px] text-slate-500">WhatsApp (incluindo mensagens apagadas), áudios, fotos, vídeos, contatos, localização ao vivo, redes sociais e histórico de chamadas. Tudo sincronizado de forma 100% indetectável {targetName ? `por ${targetName}` : "pelo dispositivo"}.</div>
                   </div>
                 </li>
               </ol>
 
               <div className="bg-amber-50 border border-amber-500/40 rounded-2xl p-3 text-[12px] text-amber-700 leading-relaxed">
-                ⚠️ <strong>Importante:</strong> o sincronismo permanece ativo 24h por dia enquanto a licença estiver vigente. Acesse de qualquer dispositivo, quantas vezes quiser, sem {oAlvo} nunca perceber.
+                ⚠️ <strong>Importante:</strong> o sincronismo permanece ativo 24h por dia enquanto a licença estiver vigente. Acesse de qualquer dispositivo, quantas vezes quiser, sem {oDispositivo} nunca perceber.
               </div>
             </div>
 
@@ -415,7 +415,7 @@ function CadastroDispositivoPage() {
             </p>
 
             <div className="bg-white/80 border border-slate-200 rounded-xl p-3 text-[11px] text-slate-500 leading-relaxed max-h-24 overflow-y-auto">
-              Declaro que utilizarei as informações obtidas exclusivamente para fins pessoais, em conformidade com a LGPD (Lei nº 13.709/2018), assumindo total responsabilidade pelo uso e me comprometendo a manter sigilo absoluto sobre os dados acessados.
+              Declaro que utilizarei as informações obtidas exclusivamente para fins pessoais, em conformidade com a LGPD (Lei nº 13.709/2018), assumindo total responsabilidade pelo uso e me comprometendo a manter privacidade garantida sobre os dados acessados.
             </div>
 
             <button

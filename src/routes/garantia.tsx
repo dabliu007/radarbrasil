@@ -49,7 +49,7 @@ function GarantiaPage() {
 
       <H2>2. O que a garantia cobre</H2>
       <ul>
-        <li>Não conseguir ativar o acesso do celular alvo.</li>
+        <li>Não conseguir ativar o acesso do celular dispositivo.</li>
         <li>Não conseguir visualizar WhatsApp, mensagens, fotos ou localização.</li>
         <li>Insatisfação com o serviço dentro do período de garantia.</li>
       </ul>

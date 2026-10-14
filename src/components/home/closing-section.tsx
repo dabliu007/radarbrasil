@@ -49,7 +49,7 @@ export function ClosingSection() {
             />
             <div className="relative flex flex-col items-center">
               <h2 className="text-balance font-display text-3xl font-extrabold uppercase leading-[1.05] tracking-tight text-[#F5F5F2] sm:text-4xl lg:text-5xl">
-                Pare de sofrer na dúvida.
+                Segurança para sua família.
                 <br className="hidden sm:block" />{" "}
                 <span
                   className="bg-clip-text text-transparent"
@@ -58,15 +58,15 @@ export function ClosingSection() {
                       "linear-gradient(100deg, #B17B13 0%, #D9A928 40%, #FFE078 100%)",
                   }}
                 >
-                  Descubra a verdade hoje
+                  Proteja seu filho hoje
                 </span>
               </h2>
               <p className="mt-5 max-w-md text-pretty text-[15px] leading-relaxed text-[#A7A7A7]">
-                Acesso o celular em minutos e veja com seus próprios olhos o que está
-                acontecendo. Rápido, sigiloso e sem deixar rastros.
+                Acompanhe o celular em minutos e veja com seus próprios olhos o que está
+                acontecendo. Rápido, responsável e com transparência.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <GoldButton to="/verificar">Começar teste grátis</GoldButton>
+                <GoldButton to="/acompanhar">Começar teste grátis</GoldButton>
                 <OutlineButton href="#como-funciona">Como funciona</OutlineButton>
               </div>
             </div>
@@ -81,8 +81,8 @@ export function ClosingSection() {
             <div className="col-span-2 flex flex-col gap-5 lg:col-span-2">
               <Logo />
               <p className="max-w-xs text-[13px] leading-relaxed text-[#A7A7A7]">
-                O aplicativo vinculador de celular que revela conversas, fotos e localização
-                para você acabar de vez com a dúvida da traição.
+                O aplicativo vinculador de celular que mostra conversas, fotos e localização
+                para você ter paz de espírito.
               </p>
             </div>
 

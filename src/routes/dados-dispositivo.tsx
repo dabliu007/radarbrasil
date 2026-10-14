@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { CityAutocomplete, MapAcessoStep } from "./verificar";
+import { CityAutocomplete, MapAcessoStep } from "./acompanhar";
 import { getInstagramProfile } from "@/lib/ig-profile.functions";
 import { consultCpf } from "@/lib/cpf.functions";
 
@@ -10,22 +10,22 @@ const searchSchema = z.object({
   phone: z.union([z.string(), z.number()]).optional().transform((v) => (v == null ? "" : String(v))),
 });
 
-export const Route = createFileRoute("/dados-alvo")({
+export const Route = createFileRoute("/dados-dispositivo")({
   head: () => ({
     meta: [
-      { title: "Dados do alvo · ZapRadar Brasil" },
+      { title: "Dados do dispositivo · ZapRadar Brasil" },
       { name: "robots", content: "noindex,nofollow" },
     ],
   }),
   validateSearch: (s) => searchSchema.parse(s),
-  component: DadosAlvoPage,
+  component: DadosDispositivoPage,
 });
 
 // CPF em stand-by: mantém todo o código no projeto, apenas oculta a etapa de CPF.
 // Trocar para `true` reativa a pergunta/consulta de CPF sem nenhuma outra mudança.
 const CPF_ENABLED = false;
 
-function DadosAlvoPage() {
+function DadosDispositivoPage() {
   const { phone } = Route.useSearch();
   const navigate = useNavigate();
 
@@ -123,11 +123,11 @@ function DadosAlvoPage() {
     try {
       if (cpfPromise) {
         await Promise.all([cpfPromise, minDelay]);
-        navigate({ to: "/alvo-encontrado", search: { phone, cpf: cpfDigits } as any });
+        navigate({ to: "/dispositivo-encontrado", search: { phone, cpf: cpfDigits } as any });
       } else {
         await minDelay;
         navigate({
-          to: "/verificar",
+          to: "/acompanhar",
           search: { phone, autostart: "1", sex: partnerSex, uf, city: city.trim() } as any,
         });
       }
@@ -184,14 +184,14 @@ function DadosAlvoPage() {
             <div className="text-center space-y-3 pt-2">
               <div className="inline-flex items-center gap-2 bg-[#25D366]/10 border border-[#128C7E]/25 text-[#128C7E] text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-[0.18em]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
-                Etapa 2 de 3 · Refinando o alvo
+                Etapa 2 de 3 · Refinando o dispositivo
               </div>
               <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 leading-tight">
                 Alguns dados do{" "}
-                <span className="text-[#128C7E]">investigado(a)</span>
+                <span className="text-[#128C7E]">acompanhado(a)</span>
               </h1>
               <p className="text-sm text-slate-500 leading-relaxed max-w-md mx-auto">
-                Isso aumenta a precisão do cruzamento com bases sociais, motéis, apps de relacionamento e localização.
+                Isso aumenta a precisão do cruzamento com bases sociais, motéis, apps de namoro e localização.
               </p>
             </div>
 
@@ -204,7 +204,7 @@ function DadosAlvoPage() {
               {/* Sexo */}
               <div className="space-y-2">
                 <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
-                  Sexo do parceiro(a) investigado(a)
+                  Sexo do filho(a) acompanhado(a)
                 </label>
                 <div className="grid grid-cols-2 gap-2">
                   {[
@@ -234,7 +234,7 @@ function DadosAlvoPage() {
               {/* Localização */}
               <div className="space-y-2">
                 <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
-                  Localização atual do investigado
+                  Localização atual do acompanhado
                 </label>
                 <div className="grid grid-cols-[110px_1fr] gap-2">
                   <select
@@ -301,7 +301,7 @@ function DadosAlvoPage() {
                 {knowsCpf === "yes" && (
                   <div className="pt-2 space-y-2 animate-in fade-in slide-in-from-top-2 duration-300">
                     <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-[#128C7E]">
-                      CPF do investigado(a)
+                      CPF do acompanhado(a)
                     </label>
                     <input
                       value={cpfInput}
@@ -330,14 +330,14 @@ function DadosAlvoPage() {
                 className="w-full h-14 bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:brightness-105 disabled:from-slate-200 disabled:to-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed text-white font-bold rounded-2xl transition-all active:scale-[0.98] relative overflow-hidden group shadow-[0_10px_25px_-8px_rgba(37,211,102,0.5)] disabled:shadow-none uppercase tracking-wider text-[14px]"
               >
                 <span className="relative flex items-center justify-center gap-2">
-                  QUERO DESCOBRIR A VERDADE
+                  QUERO COMEÇAR O ACOMPANHAMENTO
                   <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
                 </span>
               </button>
               <p className="text-center text-[11px] text-slate-500">
-                🔒 Conexão criptografada · Sigilo absoluto
+                🔒 Conexão criptografada · Privacidade garantida
               </p>
             </form>
           </div>

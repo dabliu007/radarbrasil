@@ -8,18 +8,18 @@ const searchSchema = z.object({
   phone: z.union([z.string(), z.number()]).optional().transform((v) => (v == null ? "" : String(v))),
 });
 
-export const Route = createFileRoute("/cpf-input")({
+export const Route = createFileRoute("/cpf-verificacao")({
   head: () => ({
     meta: [
-      { title: "Digite o CPF do alvo · ZapRadar Brasil" },
+      { title: "Digite o CPF do dispositivo · ZapRadar Brasil" },
       { name: "robots", content: "noindex,nofollow" },
     ],
   }),
   validateSearch: (s) => searchSchema.parse(s),
-  component: CpfInputPage,
+  component: CpfVerificacaoPage,
 });
 
-function CpfInputPage() {
+function CpfVerificacaoPage() {
   const { phone } = Route.useSearch();
   const navigate = useNavigate();
   const callCpf = useServerFn(consultCpf);
@@ -53,7 +53,7 @@ function CpfInputPage() {
         );
       } catch {}
       navigate({
-        to: "/alvo-encontrado",
+        to: "/dispositivo-encontrado",
         search: { phone, cpf: digits } as any,
       });
     } catch (e: any) {
@@ -83,11 +83,11 @@ function CpfInputPage() {
           </div>
           {/* HEADLINE */}
           <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white leading-[1.1]">
-            Descubra <span className="text-yellow-400">tudo</span> que ele esconde —
+            Identifique <span className="text-yellow-400">tudo</span> que ele esconde —
             até o que <span className="text-amber-300">deletou</span>
           </h1>
           <p className="text-sm sm:text-base text-zinc-400 leading-relaxed max-w-md mx-auto">
-            Com o CPF, cruzamos bases bancárias, motéis, apps de relacionamento e cartões para revelar o que ele tenta esconder de você.
+            Com o CPF, cruzamos bases de compras, apps de namoro e cartões para revelar o que ele acessa no celular.
           </p>
         </div>
 
@@ -105,7 +105,7 @@ function CpfInputPage() {
               <span className="text-zinc-400 ml-1">4.9</span>
             </div>
             <p className="text-[11px] text-zinc-500 leading-tight truncate">
-              <span className="text-yellow-400 font-semibold">+38.412</span> mulheres descobriram a verdade
+              <span className="text-yellow-400 font-semibold">+38.412</span> mulheres come
             </p>
           </div>
           <div className="text-right">
@@ -125,7 +125,7 @@ function CpfInputPage() {
                 Consulta sigilosa
               </div>
               <h2 className="text-base font-extrabold text-zinc-100 leading-tight">
-                Digite o CPF do alvo
+                Digite o CPF do dispositivo
               </h2>
             </div>
           </div>
@@ -166,7 +166,7 @@ function CpfInputPage() {
 
           <button
             type="button"
-            onClick={() => navigate({ to: "/cpf-alvo", search: { phone } as any })}
+            onClick={() => navigate({ to: "/cpf-responsavel", search: { phone } as any })}
             className="w-full text-[12px] text-zinc-500 hover:text-zinc-300 underline"
           >
             Voltar

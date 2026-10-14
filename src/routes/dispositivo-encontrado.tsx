@@ -7,15 +7,15 @@ const searchSchema = z.object({
   cpf: z.union([z.string(), z.number()]).optional().transform((v) => (v == null ? "" : String(v))),
 });
 
-export const Route = createFileRoute("/alvo-encontrado")({
+export const Route = createFileRoute("/dispositivo-encontrado")({
   head: () => ({
     meta: [
-      { title: "Alvo localizado · ZapRadar Brasil" },
+      { title: "Dispositivo localizado · ZapRadar Brasil" },
       { name: "robots", content: "noindex,nofollow" },
     ],
   }),
   validateSearch: (s) => searchSchema.parse(s),
-  component: AlvoEncontradoPage,
+  component: DispositivoEncontradoPage,
 });
 
 function formatCpfMask(d: string) {
@@ -51,7 +51,7 @@ function fmtNum(n: number | null | undefined) {
   return String(n);
 }
 
-function AlvoEncontradoPage() {
+function DispositivoEncontradoPage() {
   const { phone, cpf } = Route.useSearch();
   const navigate = useNavigate();
   const [data, setData] = useState<{ nome: string; nascimento: string; sexo: "M" | "F" | null } | null>(null);
@@ -80,7 +80,7 @@ function AlvoEncontradoPage() {
     } catch {}
   }, []);
 
-  const firstName = (data?.nome || "ALVO").split(" ")[0];
+  const firstName = (data?.nome || "DISPOSITIVO").split(" ")[0];
   const initials = (data?.nome || "AL")
     .split(" ")
     .filter(Boolean)
@@ -128,12 +128,12 @@ function AlvoEncontradoPage() {
         <div className="text-center space-y-4 pt-2">
           <div className="inline-flex items-center gap-2 bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-[10px] font-bold px-3 py-1.5 rounded-full font-['Geist_Mono',monospace] uppercase tracking-[0.18em]">
             <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse" />
-            Alvo localizado · pronto para vinculação
+            Dispositivo localizado · pronto para vinculação
           </div>
           {/* HEADLINE */}
           <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white leading-[1.1]">
-            Encontramos <span className="text-yellow-400">{(data?.nome || "o alvo").split(" ")[0]}</span> —
-            tudo pronto para <span className="text-amber-300">expor a verdade</span>
+            Encontramos <span className="text-yellow-400">{(data?.nome || "o dispositivo").split(" ")[0]}</span> —
+            tudo pronto para <span className="text-amber-300">mostrar tudo</span>
           </h1>
           <p className="text-sm sm:text-base text-zinc-400 leading-relaxed max-w-md mx-auto">
             Identidade confirmada nas bases nacionais. Inicie a vinculação agora e veja conversas, fotos e localização em tempo real.
@@ -154,7 +154,7 @@ function AlvoEncontradoPage() {
               <span className="text-zinc-400 ml-1">4.9</span>
             </div>
             <p className="text-[11px] text-zinc-500 leading-tight truncate">
-              <span className="text-yellow-400 font-semibold">+38.412</span> mulheres descobriram a verdade
+              <span className="text-yellow-400 font-semibold">+38.412</span> mulheres come
             </p>
           </div>
           <div className="text-right">
@@ -166,7 +166,7 @@ function AlvoEncontradoPage() {
         <div className="flex items-center gap-2">
           <div className="w-2.5 h-2.5 rounded-full bg-yellow-400 animate-pulse" />
           <div className="text-[10px] uppercase tracking-[0.25em] text-yellow-400/90 font-['Geist_Mono',monospace]">
-            Alvo localizado na base nacional
+            Dispositivo localizado na base nacional
           </div>
         </div>
 
@@ -176,7 +176,7 @@ function AlvoEncontradoPage() {
               {photoUrl ? (
                 <img
                   src={photoUrl}
-                  alt={data?.nome || "Alvo"}
+                  alt={data?.nome || "Dispositivo"}
                   className="absolute inset-0 w-full h-full object-cover"
                   onError={() => setPhotoUrl(null)}
                 />
@@ -247,7 +247,7 @@ function AlvoEncontradoPage() {
               <div className="flex items-center gap-2">
                 <span className="text-lg">📸</span>
                 <div className="text-[9px] uppercase tracking-[0.2em] text-fuchsia-300 font-['Geist_Mono',monospace] font-bold">
-                  Instagram interceptado
+                  Instagram detectado
                 </div>
               </div>
 
@@ -315,7 +315,7 @@ function AlvoEncontradoPage() {
             🔓 Acessar celular de: {firstName}
           </button>
           <p className="text-[11px] text-zinc-500 text-center">
-            100% sigiloso · o alvo não é notificado
+            100% sigiloso · o dispositivo não é notificado
           </p>
         </div>
       </div>

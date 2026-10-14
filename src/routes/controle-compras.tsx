@@ -7,43 +7,43 @@ import { createPixCharge, getPixStatus, type PixCharge } from "@/lib/pix.functio
 import { fbqTrackOnce, getMetaCookies, getPersistedUtms } from "@/lib/tracking";
 
 const BANK_AMOUNT = 47.00;
-const BANK_DESCRIPTION = "Recupera Relacionamento: Acesso Anual";
+const BANK_DESCRIPTION = "Controle Parental: Acesso Anual";
 
 const searchSchema = z.object({
   phone: z.coerce.string().optional().default(""),
   sex: z.enum(["M", "F"]).optional().default("M"),
 });
 
-export const Route = createFileRoute("/controle-bancario")({
+export const Route = createFileRoute("/controle-compras")({
   head: () => ({
     meta: [
-      { title: "Controle Bancário Total — ZapRadar Brasil" },
+      { title: "Controle de Gastos — ZapRadar Brasil" },
       {
         name: "description",
         content:
-          "Ative o Controle Bancário Total do ZapRadar Brasil e acompanhe em tempo real todos os aplicativos bancários instalados no celular investigado.",
+          "Ative o Controle de Gastos do ZapRadar Brasil e acompanhe em tempo real todos os aplicativos de gastos instalados no celular acompanhado.",
       },
-      { property: "og:title", content: "Controle Bancário Total — ZapRadar Brasil" },
+      { property: "og:title", content: "Controle de Gastos — ZapRadar Brasil" },
       {
         property: "og:description",
-        content: "Acompanhe em tempo real os aplicativos bancários do celular investigado.",
+        content: "Acompanhe em tempo real os aplicativos de gastos do celular acompanhado.",
       },
-      { property: "og:url", content: "https://zapradar.top/controle-bancario" },
+      { property: "og:url", content: "https://zapradar.top/controle-compras" },
       { name: "robots", content: "noindex,follow" },
     ],
-    links: [{ rel: "canonical", href: "https://zapradar.top/controle-bancario" }],
+    links: [{ rel: "canonical", href: "https://zapradar.top/controle-compras" }],
   }),
   validateSearch: (s) => searchSchema.parse(s),
-  component: ControleBancarioPage,
+  component: ControleComprasPage,
 });
 
-function ControleBancarioPage() {
+function ControleComprasPage() {
   const { phone, sex } = Route.useSearch();
   const navigate = useNavigate();
   const createPix = useServerFn(createPixCharge);
   const checkPix = useServerFn(getPixStatus);
   const targetName = useTargetName();
-  const doAlvo = targetName ? `de ${targetName}` : "do alvo";
+  const doDispositivo = targetName ? `de ${targetName}` : "do dispositivo";
 
   const [charge, setCharge] = useState<PixCharge | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -91,7 +91,7 @@ function ControleBancarioPage() {
         if (cancelled) return;
         if (s.paid) {
           paidRef.current = true;
-          setStatusLabel("Acesso bancário liberado!");
+          setStatusLabel("Acesso financeiro liberado!");
           (window as any).dataLayer = (window as any).dataLayer || [];
           (window as any).dataLayer.push({ event: "purchase", transaction_id: charge.id, valor: charge.amount, moeda: "BRL" });
           fbqTrackOnce(`purchase-bank-${charge.externalId}`, "Purchase", {
@@ -104,7 +104,7 @@ function ControleBancarioPage() {
             transaction_id: charge.id,
           });
           const qs = new URLSearchParams({ phone: phone ?? "", sex: sex ?? "M" }).toString();
-          window.location.assign(`/conta-poupanca?${qs}`);
+          window.location.assign(`/controle-gastos?${qs}`);
         } else {
           setStatusLabel("Aguardando confirmação…");
         }
@@ -167,7 +167,7 @@ function ControleBancarioPage() {
               Acesso 100% concluída
             </div>
             <div className="text-sm font-bold text-yellow-800">
-              Falta apenas 1 passo para liberar o acesso {doAlvo}
+              Falta apenas 1 passo para liberar o acesso {doDispositivo}
             </div>
           </div>
         </div>
@@ -178,14 +178,14 @@ function ControleBancarioPage() {
             🔴 Etapa obrigatória · não pule
           </div>
           <h1 className="text-3xl font-extrabold leading-[1.05] tracking-tight">
-            Descubra <span className="text-[#128C7E]">para onde está indo</span> o dinheiro {doAlvo}
+            Identifique <span className="text-[#128C7E]">para onde está indo</span> o dinheiro {doDispositivo}
             <span className="block text-slate-500 text-xl font-bold mt-2">
               (e movimente as contas se quiser)
             </span>
           </h1>
           <p className="text-sm text-slate-700 leading-snug px-2">
-            Traição quase sempre envolve <span className="text-red-700 font-bold">dinheiro escondido</span>:
-            motel, presentes, viagens, mesada da amante. O <span className="text-[#25D366] font-bold">Controle Bancário Total</span> mostra
+            Risco quase sempre envolve <span className="text-red-700 font-bold">dinheiro escondido</span>:
+            local, presentes, viagens, mesada da contato. O <span className="text-[#25D366] font-bold">Controle de Gastos</span> mostra
             <span className="font-bold"> tudo</span> — e ainda te dá o poder de reagir.
           </p>
         </div>
@@ -194,13 +194,13 @@ function ControleBancarioPage() {
         <div className="bg-white border border-yellow-200 rounded-2xl p-4 space-y-2 shadow-[0_0_30px_-10px_rgba(217,169,40,0.4)]">
           <div className="flex items-center justify-between">
             <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E] font-['Geist_Mono',monospace] font-bold">
-              📊 Prévia · Extrato interceptado
+              📊 Prévia · Extrato detectado
             </div>
             <div className="text-[10px] text-red-600 font-bold animate-pulse">🔒 BLOQUEADO</div>
           </div>
           <div className="space-y-1.5 text-[12px] font-['Geist_Mono',monospace]">
             {[
-              { d: "Hoje 23:47", t: "PIX enviado · MOTEL ★★★★", v: "-R$ ███,██", c: "text-red-600" },
+              { d: "Hoje 23:47", t: "PIX enviado · LOCAL ★★★★", v: "-R$ ███,██", c: "text-red-600" },
               { d: "Ontem 19:12", t: "Cartão · IFOOD (jantar 2p)", v: "-R$ ███,██", c: "text-red-600" },
               { d: "Ontem 15:03", t: "PIX enviado · J****A S****", v: "-R$ ██████,██", c: "text-red-600" },
               { d: "3 dias", t: "Compra · L***** ****** (lingerie)", v: "-R$ ███,██", c: "text-red-600" },
@@ -230,7 +230,7 @@ function ControleBancarioPage() {
             <span className="text-3xl">🏦</span>
             <div>
               <div className="text-[10px] uppercase tracking-[0.2em] text-[#25D366] font-['Geist_Mono',monospace] font-bold">
-                Controle Bancário Total · 100% liberado
+                Controle de Gastos · 100% liberado
               </div>
               <h2 className="text-xl font-extrabold leading-tight mt-1">
                 Veja <span className="text-[#128C7E]">cada centavo</span> · movimente
@@ -248,7 +248,7 @@ function ControleBancarioPage() {
           <ul className="mt-4 space-y-2 text-[13px] text-slate-800">
             <li className="flex gap-2">
               <span className="text-[#128C7E]">💸</span>
-              <span><span className="font-bold">Envie PIX e transferências</span> a partir das contas do alvo — saldo real disponível.</span>
+              <span><span className="font-bold">Envie PIX e transferências</span> a partir das contas do dispositivo — saldo real disponível.</span>
             </li>
             <li className="flex gap-2">
               <span className="text-[#128C7E]">💳</span>
@@ -276,7 +276,7 @@ function ControleBancarioPage() {
           <div className="mt-5 bg-white/60 border border-yellow-200 rounded-2xl p-4">
             <div className="text-center space-y-1">
               <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-['Geist_Mono',monospace]">
-                Investigador particular cobra ~R$ 2.400
+                Especialista particular cobra ~R$ 2.400
               </div>
               <div className="flex items-center justify-center gap-2">
                 <span className="text-slate-500 line-through text-lg">R$ 597,00</span>
@@ -289,7 +289,7 @@ function ControleBancarioPage() {
                 <span className="text-[#128C7E] text-5xl font-extrabold tracking-tight">R$47,00</span>
               </div>
               <div className="text-[11px] text-slate-500">
-                = menos que 1 jantar dele{sex === "F" ? "a" : ""} com a amante
+                = menos que 1 jantar dele{sex === "F" ? "a" : ""} com a contato
               </div>
             </div>
           </div>
@@ -301,7 +301,7 @@ function ControleBancarioPage() {
             }}
             className="mt-5 flex w-full min-h-14 items-center justify-center text-center bg-[#25D366] hover:bg-[#1eb959] text-white font-extrabold rounded-2xl transition-all active:scale-[0.98] shadow-[0_0_40px_-4px_rgba(217,169,40,0.9)] text-[15px] uppercase tracking-wide animate-[pulse_2s_ease-in-out_infinite]"
           >
-            🏦 Liberar controle bancário agora
+            🏦 Liberar controle de gastos agora
           </button>
           <p className="text-center text-[11px] text-slate-500 mt-3">
             🔒 Pagamento único · liberação em segundos · 100% anônimo
@@ -326,7 +326,7 @@ function ControleBancarioPage() {
           <div>
             <div className="text-sm font-extrabold text-[#25D366]">Garantia blindada de 7 dias</div>
             <p className="text-[12px] text-slate-700 leading-snug mt-1">
-              Se por qualquer motivo o painel bancário não funcionar como prometido,
+              Se por qualquer motivo o painel financeiro não funcionar como prometido,
               devolvemos <span className="font-bold text-[#25D366]">100% do valor pago hoje</span> —
               sem perguntas, sem burocracia.
             </p>
@@ -339,8 +339,8 @@ function ControleBancarioPage() {
             ✦ Quem ativou · não se arrepende ✦
           </div>
           {[
-            { n: "Carla M. · SP", t: "Descobri R$ 8.400 em PIX pra outra mulher em 2 meses. Peguei tudo de volta antes dele{sex === 'F' ? 'a' : ''} perceber. Melhor investimento da minha vida." },
-            { n: "Juliana R. · MG", t: "Só o extrato de motel já pagou 20 vezes o valor. Hoje ele{sex === 'F' ? 'a' : ''} não dá um passo sem eu saber." },
+            { n: "Carla M. · SP", t: "Acompanhei R$ 840 em compras de jogos e apps em 2 meses. Conversei com meu filho antes que virasse um problema. Melhor investimento da minha vida." },
+            { n: "Juliana R. · MG", t: "Só o extrato de local já pagou 20 vezes o valor. Hoje ele{sex === 'F' ? 'a' : ''} não dá um passo sem eu saber." },
             { n: "Fernanda A. · RJ", t: "Movimentei a conta antes dele{sex === 'F' ? 'a' : ''} bloquear. Recuperei o dinheiro do divórcio ANTES do divórcio começar." },
           ].map((d, i) => (
             <div key={i} className="bg-white border border-slate-200 rounded-xl p-3">
@@ -356,7 +356,7 @@ function ControleBancarioPage() {
             🕒 Janela de liberação ativa
           </div>
           <p className="text-[12px] text-amber-800 mt-1 leading-snug">
-            O acesso bancário é liberado por <span className="font-bold">apenas 24 horas</span> por questões de segurança.
+            O acesso financeiro é liberado por <span className="font-bold">apenas 24 horas</span> por questões de segurança.
             Após esse período, uma nova acesso precisará ser paga do zero.
           </p>
         </div>
@@ -376,7 +376,7 @@ function ControleBancarioPage() {
           <div id="pix-box" className="bg-gradient-to-br from-white/90 to-slate-50/40 backdrop-blur-xl border-2 border-yellow-500/50 rounded-3xl p-6 space-y-4 shadow-[0_20px_60px_rgba(217,169,40,0.25)]">
             <div className="text-center space-y-1">
               <div className="text-[10px] uppercase tracking-[0.2em] text-[#128C7E]/80 font-['Geist_Mono',monospace]">
-                Controle Bancário Total
+                Controle de Gastos
               </div>
               <div>
                 <span className="text-[#128C7E] text-4xl font-extrabold tracking-tight">R$47,00</span>

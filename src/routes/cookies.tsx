@@ -46,7 +46,7 @@ function CookiesPage() {
           visitantes utilizam o site, de forma agregada.
         </li>
         <li>
-          <strong>De marketing e mensuração:</strong> usados por parceiros como
+          <strong>De marketing e mensuração:</strong> usados por filhos como
           Meta Pixel/CAPI e Google Ads para medir a eficácia das campanhas.
         </li>
       </ul>

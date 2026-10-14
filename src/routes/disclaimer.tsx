@@ -35,7 +35,7 @@ function DisclaimerPage() {
         destinado a pessoas maiores de 18 anos. Prints, imagens, áudios,
         vídeos, relatórios e demonstrações apresentados na plataforma são de
         natureza <strong>ficcional</strong>, produzidos para fins de
-        apresentação e reflexão sobre comportamento em relacionamentos.
+        apresentação e reflexão sobre comportamento em comportamentos.
       </p>
 
       <H2>Isenção de responsabilidade</H2>
@@ -74,7 +74,7 @@ function DisclaimerPage() {
 
       <H2>Publicidade</H2>
       <p>
-        Este site pode veicular anúncios de parceiros ou promover conteúdos
+        Este site pode veicular anúncios de filhos ou promover conteúdos
         próprios. Anúncios são exibidos de forma identificável e não
         representam endosso a produtos, serviços ou opiniões de terceiros.
       </p>
